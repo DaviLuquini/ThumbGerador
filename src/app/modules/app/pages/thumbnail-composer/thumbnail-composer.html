@@ -1,0 +1,19 @@
+<div class="controls">
+    <label>
+        Video image:
+        <input type="file" accept="image/*" (change)="onPickVideo($event)" />
+    </label>
+
+    <label>
+        Person image:
+        <input type="file" accept="image/*" (change)="onPickPerson($event)" />
+    </label>
+
+    <input #titleInput class="title" [value]="title" (input)="onTitleChange(titleInput.value)" placeholder="Título" />
+
+    <button (click)="exportPNG()">Exportar PNG</button>
+</div>
+
+<div class="preview">
+    <div #stageHost class="stage-host"></div>
+</div>

@@ -1,0 +1,36 @@
+    /* Webkit Scrollbar Customization */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: var(--color-border-light);
+        border-radius: 4px;
+    }
+
+    :host-context(.dark) ::-webkit-scrollbar-thumb {
+        background-color: var(--color-border-dark);
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color-text-secondary-light);
+    }
+
+    :host-context(.dark) ::-webkit-scrollbar-thumb:hover {
+        background-color: var(--color-text-secondary-dark);
+    }
+
+    /* Toggle Checkbox */
+    .toggle-checkbox:checked {
+        right: 0;
+        border-color: var(--color-primary);
+    }
+
+    .toggle-checkbox:checked+.toggle-label {
+        background-color: var(--color-primary);
+    }

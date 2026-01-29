@@ -1,0 +1,25 @@
+.controls {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.title {
+    padding: 8px;
+    min-width: 280px;
+}
+
+.preview {
+    width: 360px;
+    /* previewWidth */
+}
+
+.stage-host {
+    width: 360px;
+    height: 640px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #000;
+}

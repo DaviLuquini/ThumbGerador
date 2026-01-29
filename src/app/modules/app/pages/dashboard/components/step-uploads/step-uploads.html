@@ -1,0 +1,43 @@
+<div class="flex flex-col gap-4">
+    <h2 class="text-text-main-light dark:text-white text-lg font-bold flex items-center gap-3">
+        <span
+            class="flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-surface-card border border-border-light dark:border-border-dark text-primary text-sm font-bold shadow-sm">1</span>
+        Envie suas imagens
+    </h2>
+    <div
+        class="bg-white dark:bg-surface-card rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm transition-colors duration-200">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Video Image Upload -->
+            <div class="flex flex-col gap-3">
+                <label class="text-sm font-medium text-text-main-light dark:text-white">Imagem
+                    do Vídeo
+                </label>
+                <div
+                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark">
+                    <div
+                        class="flex flex-col items-center justify-center pt-5 pb-6 text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-4xl mb-2">image</span>
+                        <p class="text-xs font-medium">Arraste ou clique para enviar</p>
+                        <p class="text-[10px] mt-1 opacity-60">1920x1080 recomendado</p>
+                    </div>
+                    <input class="hidden" type="file" accept="image/*" (change)="onPickVideo($event)" />
+                </div>
+            </div>
+            <!-- Person Image Upload -->
+            <div class="flex flex-col gap-3">
+                <label class="text-sm font-medium text-text-main-light dark:text-white flex justify-between">
+                    Foto da Pessoa
+                </label>
+                <div
+                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark">
+                    <div
+                        class="flex flex-col items-center justify-center pt-5 pb-6 text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-4xl mb-2">person_add</span>
+                        <p class="text-xs font-medium">Arraste ou clique para enviar</p>
+                    </div>
+                    <input class="hidden" type="file" accept="image/*" (change)="onPickPerson($event)" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="flex flex-col gap-4">
+    <h2 class="text-text-main-light dark:text-white text-lg font-bold flex items-center gap-3">
+        <span
+            class="flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-surface-card border border-border-light dark:border-border-dark text-primary text-sm font-bold shadow-sm">3</span>
+        Estilo do Template
+    </h2>
+
+    <div class="grid grid-cols-2 gap-4">
+        <!-- Template Option 1: Faixa Vermelha (9x16) -->
+        <label class="cursor-pointer group relative template-card">
+            <input class="peer sr-only" name="template" type="radio" [checked]="selectedTemplateId === 'faixa-vermelha'"
+                (change)="templateSelected.emit('faixa-vermelha')" />
+            <div
+                class="relative overflow-hidden rounded-xl border-2 border-border-light dark:border-border-dark peer-checked:border-primary transition-all bg-white dark:bg-surface-card">
+                <div class="template-preview aspect-[9/16] bg-cover bg-center opacity-90 peer-checked:opacity-100 transition-opacity"
+                    data-alt="Template Faixa Vermelha 9x16"
+                    style='background-image: url("assets/images/template-faixa-vermelha.png");'>
+                </div>
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                    <span class="text-white font-medium text-sm">Visualizar</span>
+                </div>
+                <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+                    <div class="bg-primary text-background-dark rounded-full p-0.5">
+                        <span class="material-symbols-outlined text-sm font-bold block">check</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Template Faixa Vermelha</p>
+        </label>
+
+        <!-- Template Option 2: Prompt / Do zero (9x16) -->
+        <label class="cursor-pointer group relative template-card">
+            <input class="peer sr-only" name="template" type="radio" [checked]="selectedTemplateId === 'prompt'"
+                (change)="templateSelected.emit('prompt')" />
+            <div
+                class="relative overflow-hidden rounded-xl border-2 border-border-light dark:border-border-dark peer-checked:border-primary transition-all bg-white dark:bg-surface-card">
+                <div
+                    class="template-preview aspect-[9/16] bg-gradient-to-br from-primary/10 to-primary/30 flex flex-col items-center justify-center text-center p-4">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-2">auto_awesome</span>
+                    <span class="text-text-main-light dark:text-white text-xs font-semibold">Gerar
+                        via prompt</span>
+                    <span class="text-text-secondary-light dark:text-text-secondary text-[10px] mt-1">Do
+                        zero com IA</span>
+                </div>
+                <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+                    <div class="bg-primary text-background-dark rounded-full p-0.5">
+                        <span class="material-symbols-outlined text-sm font-bold block">check</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Do zero (Prompt)</p>
+        </label>
+    </div>
+
+    @if (showEnhanceOption) {
+    <div
+        class="bg-white dark:bg-surface-card rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm">
+        <div class="flex items-center justify-between gap-4">
+            <div>
+                <h3 class="text-text-main-light dark:text-white text-sm font-semibold">Enhance
+                    photo with AI</h3>
+                <p class="text-text-secondary-light dark:text-text-secondary text-xs">
+                    Melhora recorte, luz e contraste. Custa +2 créditos.
+                </p>
+            </div>
+            <button (click)="enhanceToggled.emit()"
+                class="px-3 py-2 rounded-lg text-sm font-medium border transition-colors border-border-light dark:border-border-dark text-text-main-light dark:text-white"
+                [class.border-primary]="enhanceAi" [class.text-primary]="enhanceAi"
+                [class.bg-primary]="enhanceAi">
+                {{ enhanceAi ? 'Ativado' : 'Ativar' }}
+            </button>
+        </div>
+
+        @if (enhanceAi) {
+        <div class="mt-4 grid grid-cols-2 gap-3">
+            <div class="rounded-lg overflow-hidden border border-border-light dark:border-border-dark">
+                <div
+                    class="aspect-video bg-surface-light dark:bg-background-dark flex items-center justify-center text-xs text-text-secondary-light dark:text-text-secondary">
+                    Antes
+                </div>
+            </div>
+            <div class="rounded-lg overflow-hidden border border-primary/40">
+                <div class="aspect-video bg-primary/10 flex items-center justify-center text-xs text-primary">
+                    Depois (AI Enhance)
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    }
+</div>
