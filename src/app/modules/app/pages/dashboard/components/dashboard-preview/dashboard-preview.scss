@@ -1,9 +1,11 @@
 .preview-stage {
-    padding: 16px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .stage-host {
     width: 100%;
-    max-width: 360px;
-    margin: 0 auto;
+    margin: 0;
 }

@@ -75,7 +75,7 @@ export class ThumbnailComposer implements AfterViewInit, OnDestroy {
   readonly BOTTOM: Rect = { x: 0, y: 1100, width: this.W, height: 820 };
 
   // Template overlay (PNG idealmente com transparência)
-  readonly TEMPLATE_URL = "assets/images/thumbnail-template.png";
+  readonly TEMPLATE_URL = "";
 
   // Preview responsivo (tamanho na tela)
   previewWidth = 360;

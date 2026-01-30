@@ -219,20 +219,6 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
 
     if (this.selectedTemplateId === 'faixa-vermelha') {
       try {
-        const img = await loadHtmlImage('assets/images/template-faixa-vermelha.png');
-        this.templateKonvaImg = new Konva.Image({
-          x: 0,
-          y: 0,
-          width: this.W,
-          height: this.H,
-          image: img,
-          listening: false,
-        });
-      } catch (err) {
-        console.warn('Template image failed to load:', err);
-      }
-
-      try {
         const bannerImg = await loadHtmlImage('assets/images/faixa-vermelha.png');
         this.bannerImg = new Konva.Image({
           x: this.BANNER.x,
@@ -255,7 +241,6 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
 
     this.layer.removeChildren();
     this.layer.add(this.bgRect);
-    if (this.templateKonvaImg) this.layer.add(this.templateKonvaImg);
     this.layer.add(this.videoGroup);
     this.layer.add(this.personGroup);
     if (this.bannerImg) this.layer.add(this.bannerImg);

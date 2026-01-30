@@ -13,14 +13,25 @@
                     do Vídeo
                 </label>
                 <div
-                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark">
+                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                    [class.border-primary]="isDraggingVideo"
+                    [class.bg-white]="isDraggingVideo"
+                    tabindex="0"
+                    role="button"
+                    (click)="openFilePicker(videoInput)"
+                    (keydown.enter)="openFilePicker(videoInput)"
+                    (keydown.space)="$event.preventDefault(); openFilePicker(videoInput)"
+                    (dragover)="onDragOver($event)"
+                    (dragenter)="onDragEnter('video', $event)"
+                    (dragleave)="onDragLeave('video', $event)"
+                    (drop)="onDrop('video', $event)">
                     <div
                         class="flex flex-col items-center justify-center pt-5 pb-6 text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-4xl mb-2">image</span>
                         <p class="text-xs font-medium">Arraste ou clique para enviar</p>
                         <p class="text-[10px] mt-1 opacity-60">1920x1080 recomendado</p>
                     </div>
-                    <input class="hidden" type="file" accept="image/*" (change)="onPickVideo($event)" />
+                    <input #videoInput class="hidden" type="file" accept="image/*" (change)="onPickVideo($event)" />
                 </div>
             </div>
             <!-- Person Image Upload -->
@@ -29,13 +40,24 @@
                     Foto da Pessoa
                 </label>
                 <div
-                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark">
+                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                    [class.border-primary]="isDraggingPerson"
+                    [class.bg-white]="isDraggingPerson"
+                    tabindex="0"
+                    role="button"
+                    (click)="openFilePicker(personInput)"
+                    (keydown.enter)="openFilePicker(personInput)"
+                    (keydown.space)="$event.preventDefault(); openFilePicker(personInput)"
+                    (dragover)="onDragOver($event)"
+                    (dragenter)="onDragEnter('person', $event)"
+                    (dragleave)="onDragLeave('person', $event)"
+                    (drop)="onDrop('person', $event)">
                     <div
                         class="flex flex-col items-center justify-center pt-5 pb-6 text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-4xl mb-2">person_add</span>
                         <p class="text-xs font-medium">Arraste ou clique para enviar</p>
                     </div>
-                    <input class="hidden" type="file" accept="image/*" (change)="onPickPerson($event)" />
+                    <input #personInput class="hidden" type="file" accept="image/*" (change)="onPickPerson($event)" />
                 </div>
             </div>
         </div>

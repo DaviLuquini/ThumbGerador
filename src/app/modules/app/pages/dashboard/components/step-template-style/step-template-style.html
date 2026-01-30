@@ -72,16 +72,43 @@
         </div>
 
         @if (enhanceAi) {
-        <div class="mt-4 grid grid-cols-2 gap-3">
-            <div class="rounded-lg overflow-hidden border border-border-light dark:border-border-dark">
-                <div
-                    class="aspect-video bg-surface-light dark:bg-background-dark flex items-center justify-center text-xs text-text-secondary-light dark:text-text-secondary">
-                    Antes
+        <div class="mt-5 flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+                <label class="text-sm font-medium text-text-main-light dark:text-white">Tom do Vídeo</label>
+                <div class="grid grid-cols-2 gap-3">
+                    @for (tone of toneOptions; track tone.id) {
+                    <button type="button"
+                        class="flex flex-col gap-2 p-2 rounded-lg border border-border-light dark:border-border-dark bg-surface-light dark:bg-background-dark text-left transition-all"
+                        [class.border-primary]="selectedTone === tone.id"
+                        [class.ring-2]="selectedTone === tone.id"
+                        [class.ring-primary/30]="selectedTone === tone.id"
+                        (click)="onSelectTone(tone.id)">
+                        <div class="aspect-video rounded-md bg-black"></div>
+                        <span class="text-[11px] font-medium text-text-main-light dark:text-white">{{ tone.label }}</span>
+                    </button>
+                    }
                 </div>
             </div>
-            <div class="rounded-lg overflow-hidden border border-primary/40">
-                <div class="aspect-video bg-primary/10 flex items-center justify-center text-xs text-primary">
-                    Depois (AI Enhance)
+
+            <div class="flex flex-col gap-2">
+                <label class="text-sm font-medium text-text-main-light dark:text-white">Prompt para IA</label>
+                <textarea
+                    class="w-full min-h-[90px] bg-surface-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-text-main-light dark:text-white placeholder-text-secondary-light/50 dark:placeholder-text-secondary/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
+                    placeholder="Descreva a thumbnail que deseja gerar..." [value]="promptText"
+                    (input)="onPromptChange($any($event.target).value)"></textarea>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div class="rounded-lg overflow-hidden border border-border-light dark:border-border-dark">
+                    <div
+                        class="aspect-video bg-surface-light dark:bg-background-dark flex items-center justify-center text-xs text-text-secondary-light dark:text-text-secondary">
+                        Antes
+                    </div>
+                </div>
+                <div class="rounded-lg overflow-hidden border border-primary/40">
+                    <div class="aspect-video bg-primary/10 flex items-center justify-center text-xs text-primary">
+                        Depois (AI Enhance)
+                    </div>
                 </div>
             </div>
         </div>

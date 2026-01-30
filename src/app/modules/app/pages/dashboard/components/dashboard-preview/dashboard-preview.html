@@ -1,6 +1,14 @@
-<div
-    class="bg-white dark:bg-surface-card rounded-xl border border-border-light dark:border-border-dark overflow-hidden shadow-lg relative transition-colors duration-200">
-    <div class="preview-stage">
-        <div #stageHost class="stage-host"></div>
+<div class="flex flex-col gap-3 mx-auto max-w-[320px]">
+    <div class="flex items-center gap-2 px-1">
+        <span class="material-symbols-outlined text-primary text-lg">smartphone</span>
+        <h3 class="text-text-main-light dark:text-white text-sm font-bold tracking-tight">Preview da Thumb</h3>
+    </div>
+
+    <div
+        class="bg-black rounded-[2.5rem] border-[10px] border-slate-900 dark:border-slate-800 
+        overflow-hidden shadow-2xl relative ring-4 ring-slate-900/10 transition-all duration-300">
+        <div class="preview-stage">
+            <div #stageHost class="stage-host"></div>
+        </div>
     </div>
 </div>

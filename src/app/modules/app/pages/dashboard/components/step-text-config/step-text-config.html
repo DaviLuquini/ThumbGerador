@@ -14,23 +14,5 @@
                 id="video-title" placeholder="EX: Igão revela novo integrante do Podpah..." type="text"
                 [value]="title" (input)="onTitleChange($any($event.target).value)" />
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="flex flex-col gap-2">
-                <label class="text-sm font-medium text-text-main-light dark:text-white">Tom do Vídeo</label>
-                <div class="relative">
-                    <select
-                        class="w-full appearance-none bg-surface-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-text-main-light dark:text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none cursor-pointer">
-                        <option>Entusiasmado / Viral</option>
-                        <option>Sério / Notícia</option>
-                        <option>Misterioso / Curiosidade</option>
-                        <option>Educativo / Clean</option>
-                    </select>
-                    <div
-                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-text-main-light dark:text-white">
-                        <span class="material-symbols-outlined text-sm">expand_more</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
