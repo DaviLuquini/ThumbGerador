@@ -1,0 +1,6 @@
+@ThumbGenerator_HostAddress = http://localhost:5126
+
+GET {{ThumbGenerator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
