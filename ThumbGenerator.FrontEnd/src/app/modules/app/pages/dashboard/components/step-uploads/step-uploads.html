@@ -1,9 +1,29 @@
 <div class="flex flex-col gap-4">
-    <h2 class="text-text-main-light dark:text-white text-lg font-bold flex items-center gap-3">
-        <span
-            class="flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-surface-card border border-border-light dark:border-border-dark text-primary text-sm font-bold shadow-sm">1</span>
-        Envie suas imagens
-    </h2>
+    <div class="flex items-center justify-between flex-wrap gap-3">
+        <h2 class="text-text-main-light dark:text-white text-lg font-bold flex items-center gap-3">
+            <span
+                class="flex items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-surface-card border border-border-light dark:border-border-dark text-primary text-sm font-bold shadow-sm">1</span>
+            Envie suas imagens
+        </h2>
+        <!-- Orientation Toggle -->
+        <div
+            class="flex items-center gap-2 bg-white dark:bg-surface-card rounded-lg p-1 border border-border-light dark:border-border-dark shadow-sm">
+            <button type="button"
+                class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200"
+                [ngClass]="isVertical ? 'bg-primary text-white shadow-sm' : 'text-text-secondary-light dark:text-text-secondary hover:text-primary'"
+                (click)="!isVertical && orientationToggled.emit()">
+                <span class="material-symbols-outlined text-[18px]">crop_portrait</span>
+                <span class="hidden sm:inline">Vertical</span>
+            </button>
+            <button type="button"
+                class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200"
+                [ngClass]="!isVertical ? 'bg-primary text-white shadow-sm' : 'text-text-secondary-light dark:text-text-secondary hover:text-primary'"
+                (click)="isVertical && orientationToggled.emit()">
+                <span class="material-symbols-outlined text-[18px]">crop_landscape</span>
+                <span class="hidden sm:inline">Horizontal</span>
+            </button>
+        </div>
+    </div>
     <div
         class="bg-white dark:bg-surface-card rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm transition-colors duration-200">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -12,24 +32,19 @@
                 <label class="text-sm font-medium text-text-main-light dark:text-white">Imagem
                     do Vídeo
                 </label>
-                <div
-                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
-                    [class.border-primary]="isDraggingVideo"
-                    [class.bg-white]="isDraggingVideo"
-                    tabindex="0"
-                    role="button"
-                    (click)="openFilePicker(videoInput)"
+                <div class="group relative flex flex-col items-center justify-center w-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                    [ngClass]="isVertical ? 'aspect-[3/4]' : 'aspect-video'" [class.border-primary]="isDraggingVideo"
+                    [class.bg-white]="isDraggingVideo" tabindex="0" role="button" (click)="openFilePicker(videoInput)"
                     (keydown.enter)="openFilePicker(videoInput)"
                     (keydown.space)="$event.preventDefault(); openFilePicker(videoInput)"
-                    (dragover)="onDragOver($event)"
-                    (dragenter)="onDragEnter('video', $event)"
-                    (dragleave)="onDragLeave('video', $event)"
-                    (drop)="onDrop('video', $event)">
+                    (dragover)="onDragOver($event)" (dragenter)="onDragEnter('video', $event)"
+                    (dragleave)="onDragLeave('video', $event)" (drop)="onDrop('video', $event)">
                     <div
-                        class="flex flex-col items-center justify-center pt-5 pb-6 text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
+                        class="flex flex-col items-center justify-center text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-4xl mb-2">image</span>
                         <p class="text-xs font-medium">Arraste ou clique para enviar</p>
-                        <p class="text-[10px] mt-1 opacity-60">1920x1080 recomendado</p>
+                        <p class="text-[10px] mt-1 opacity-60">{{ isVertical ? '1080x1920 recomendado' : '1920x1080
+                            recomendado' }}</p>
                     </div>
                     <input #videoInput class="hidden" type="file" accept="image/*" (change)="onPickVideo($event)" />
                 </div>
@@ -39,21 +54,15 @@
                 <label class="text-sm font-medium text-text-main-light dark:text-white flex justify-between">
                     Foto da Pessoa
                 </label>
-                <div
-                    class="group relative flex flex-col items-center justify-center w-full h-40 border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
-                    [class.border-primary]="isDraggingPerson"
-                    [class.bg-white]="isDraggingPerson"
-                    tabindex="0"
-                    role="button"
-                    (click)="openFilePicker(personInput)"
+                <div class="group relative flex flex-col items-center justify-center w-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
+                    [ngClass]="isVertical ? 'aspect-[3/4]' : 'aspect-video'" [class.border-primary]="isDraggingPerson"
+                    [class.bg-white]="isDraggingPerson" tabindex="0" role="button" (click)="openFilePicker(personInput)"
                     (keydown.enter)="openFilePicker(personInput)"
                     (keydown.space)="$event.preventDefault(); openFilePicker(personInput)"
-                    (dragover)="onDragOver($event)"
-                    (dragenter)="onDragEnter('person', $event)"
-                    (dragleave)="onDragLeave('person', $event)"
-                    (drop)="onDrop('person', $event)">
+                    (dragover)="onDragOver($event)" (dragenter)="onDragEnter('person', $event)"
+                    (dragleave)="onDragLeave('person', $event)" (drop)="onDrop('person', $event)">
                     <div
-                        class="flex flex-col items-center justify-center pt-5 pb-6 text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
+                        class="flex flex-col items-center justify-center text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-4xl mb-2">person_add</span>
                         <p class="text-xs font-medium">Arraste ou clique para enviar</p>
                     </div>

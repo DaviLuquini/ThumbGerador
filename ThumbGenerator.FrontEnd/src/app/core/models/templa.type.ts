@@ -1,1 +1,1 @@
-export type TemplateId = 'faixa-vermelha' | 'prompt';
+export type TemplateId = 'faixa-vermelha' | 'prompt' | 'youtube-classico' | 'gaming';

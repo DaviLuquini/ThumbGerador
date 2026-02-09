@@ -41,7 +41,7 @@ export class DashboardStepTemplateStyle {
     this.promptChanged.emit(value);
   }
 
-  isVertical = true;
+  @Input() isVertical = true;
   toggleOrientation() {
     this.isVertical = !this.isVertical;
   }

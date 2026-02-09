@@ -145,6 +145,39 @@ public class ThumbnailController : ControllerBase
         return Ok(generations);
     }
 
+    /// <summary>
+    /// Get a specific generation by ID
+    /// </summary>
+    [HttpGet("{id}")]
+    [ProducesResponseType(typeof(ThumbnailHistoryItem), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<ThumbnailHistoryItem>> GetGenerationById(Guid id)
+    {
+        var userId = GetCurrentUserId();
+        if (userId == null)
+        {
+            return Unauthorized();
+        }
+
+        var generation = await _context.ThumbnailGenerations
+            .Where(g => g.Id == id && g.UserId == userId.Value)
+            .Select(g => new ThumbnailHistoryItem(
+                g.Id,
+                g.TemplateId,
+                g.Title,
+                $"/generated/{userId}/{Path.GetFileName(g.GeneratedImagePath)}",
+                g.CreatedAt
+            ))
+            .FirstOrDefaultAsync();
+
+        if (generation == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(generation);
+    }
+
     private Guid? GetCurrentUserId()
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);

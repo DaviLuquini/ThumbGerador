@@ -5,15 +5,17 @@
         Estilo do Template
     </h2>
 
+    <!-- Templates Verticais (9:16) -->
+    @if (isVertical) {
     <div class="grid grid-cols-2 gap-4">
-        <!-- Template Option 1: Faixa Vermelha (9x16) -->
+        <!-- Template Vertical 1: Faixa Vermelha -->
         <label class="cursor-pointer group relative template-card">
             <input class="peer sr-only" name="template" type="radio" [checked]="selectedTemplateId === 'faixa-vermelha'"
                 (change)="templateSelected.emit('faixa-vermelha')" />
             <div
                 class="relative overflow-hidden rounded-xl border-2 border-border-light dark:border-border-dark peer-checked:border-primary transition-all bg-white dark:bg-surface-card">
                 <div class="template-preview aspect-[9/16] bg-cover bg-center opacity-90 peer-checked:opacity-100 transition-opacity"
-                    data-alt="Template Faixa Vermelha 9x16"
+                    data-alt="Template Faixa Vermelha"
                     style='background-image: url("assets/images/template-faixa-vermelha.png");'>
                 </div>
                 <div
@@ -26,11 +28,10 @@
                     </div>
                 </div>
             </div>
-            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Template Faixa Vermelha
-            </p>
+            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Faixa Vermelha</p>
         </label>
 
-        <!-- Template Option 2: Prompt / Do zero (9x16) -->
+        <!-- Template Vertical 2: Prompt / Do zero -->
         <label class="cursor-pointer group relative template-card">
             <input class="peer sr-only" name="template" type="radio" [checked]="selectedTemplateId === 'prompt'"
                 (change)="templateSelected.emit('prompt')" />
@@ -39,10 +40,9 @@
                 <div
                     class="template-preview aspect-[9/16] bg-gradient-to-br from-primary/10 to-primary/30 flex flex-col items-center justify-center text-center p-4">
                     <span class="material-symbols-outlined text-primary text-3xl mb-2">auto_awesome</span>
-                    <span class="text-text-main-light dark:text-white text-xs font-semibold">Gerar
-                        via prompt</span>
-                    <span class="text-text-secondary-light dark:text-text-secondary text-[10px] mt-1">Do
-                        zero com IA</span>
+                    <span class="text-text-main-light dark:text-white text-xs font-semibold">Gerar via prompt</span>
+                    <span class="text-text-secondary-light dark:text-text-secondary text-[10px] mt-1">Do zero com
+                        IA</span>
                 </div>
                 <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
                     <div class="bg-primary text-background-dark rounded-full p-0.5">
@@ -53,6 +53,83 @@
             <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Do zero (Prompt)</p>
         </label>
     </div>
+    }
+
+    <!-- Templates Horizontais (16:9) -->
+    @if (!isVertical) {
+    <div class="grid grid-cols-2 gap-4">
+        <!-- Template Horizontal 1: YouTube Clássico -->
+        <label class="cursor-pointer group relative template-card">
+            <input class="peer sr-only" name="template" type="radio"
+                [checked]="selectedTemplateId === 'youtube-classico'"
+                (change)="templateSelected.emit('youtube-classico')" />
+            <div
+                class="relative overflow-hidden rounded-xl border-2 border-border-light dark:border-border-dark peer-checked:border-primary transition-all bg-white dark:bg-surface-card">
+                <div
+                    class="template-preview aspect-video bg-gradient-to-br from-red-600 to-red-800 flex flex-col items-center justify-center opacity-90 peer-checked:opacity-100 transition-opacity">
+                    <span class="material-symbols-outlined text-white text-4xl mb-1">play_circle</span>
+                    <span class="text-white text-xs font-semibold">YouTube Style</span>
+                </div>
+                <div
+                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                    <span class="text-white font-medium text-sm">Visualizar</span>
+                </div>
+                <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+                    <div class="bg-primary text-background-dark rounded-full p-0.5">
+                        <span class="material-symbols-outlined text-sm font-bold block">check</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">YouTube Clássico</p>
+        </label>
+
+        <!-- Template Horizontal 2: Gaming -->
+        <label class="cursor-pointer group relative template-card">
+            <input class="peer sr-only" name="template" type="radio" [checked]="selectedTemplateId === 'gaming'"
+                (change)="templateSelected.emit('gaming')" />
+            <div
+                class="relative overflow-hidden rounded-xl border-2 border-border-light dark:border-border-dark peer-checked:border-primary transition-all bg-white dark:bg-surface-card">
+                <div
+                    class="template-preview aspect-video bg-gradient-to-br from-purple-600 to-blue-600 flex flex-col items-center justify-center opacity-90 peer-checked:opacity-100 transition-opacity">
+                    <span class="material-symbols-outlined text-white text-4xl mb-1">sports_esports</span>
+                    <span class="text-white text-xs font-semibold">Gaming</span>
+                </div>
+                <div
+                    class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/40">
+                    <span class="text-white font-medium text-sm">Visualizar</span>
+                </div>
+                <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+                    <div class="bg-primary text-background-dark rounded-full p-0.5">
+                        <span class="material-symbols-outlined text-sm font-bold block">check</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Gaming</p>
+        </label>
+
+        <!-- Template Horizontal 3: Prompt / Do zero -->
+        <label class="cursor-pointer group relative template-card">
+            <input class="peer sr-only" name="template" type="radio" [checked]="selectedTemplateId === 'prompt'"
+                (change)="templateSelected.emit('prompt')" />
+            <div
+                class="relative overflow-hidden rounded-xl border-2 border-border-light dark:border-border-dark peer-checked:border-primary transition-all bg-white dark:bg-surface-card">
+                <div
+                    class="template-preview aspect-video bg-gradient-to-br from-primary/10 to-primary/30 flex flex-col items-center justify-center text-center p-4">
+                    <span class="material-symbols-outlined text-primary text-3xl mb-2">auto_awesome</span>
+                    <span class="text-text-main-light dark:text-white text-xs font-semibold">Gerar via prompt</span>
+                    <span class="text-text-secondary-light dark:text-text-secondary text-[10px] mt-1">Do zero com
+                        IA</span>
+                </div>
+                <div class="absolute top-2 right-2 opacity-0 peer-checked:opacity-100 transition-opacity">
+                    <div class="bg-primary text-background-dark rounded-full p-0.5">
+                        <span class="material-symbols-outlined text-sm font-bold block">check</span>
+                    </div>
+                </div>
+            </div>
+            <p class="text-text-main-light dark:text-white text-sm font-medium mt-2 text-center">Do zero (Prompt)</p>
+        </label>
+    </div>
+    }
 
     @if (templateConfig.features.showPromptInput) {
     <div
@@ -88,15 +165,7 @@
         @if (enhanceAi) {
         <div class="mt-5 flex flex-col gap-4">
             <div class="flex flex-col gap-2">
-                <div class="flex items-center justify-between">
-                    <label class="text-sm font-medium text-text-main-light dark:text-white">Tom do Vídeo</label>
-                    <button (click)="toggleOrientation()"
-                        class="text-xs font-medium text-primary hover:text-primary-hover flex items-center gap-1 transition-colors">
-                        <span class="material-symbols-outlined text-[16px]">{{ isVertical ? 'crop_portrait' :
-                            'crop_landscape' }}</span>
-                        {{ isVertical ? 'Vertical (9:16)' : 'Horizontal (16:9)' }}
-                    </button>
-                </div>
+                <label class="text-sm font-medium text-text-main-light dark:text-white">Tom do Vídeo</label>
                 <div class="grid gap-3" [ngClass]="isVertical ? 'grid-cols-4' : 'grid-cols-2'">
                     @for (tone of toneOptions; track tone.id) {
                     <button type="button" class="flex flex-col items-center gap-1.5 transition-all"

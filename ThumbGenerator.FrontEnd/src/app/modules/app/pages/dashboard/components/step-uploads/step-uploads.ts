@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,8 +8,10 @@ import { CommonModule } from '@angular/common';
   styleUrl: './step-uploads.scss',
 })
 export class DashboardStepUploads {
+  @Input() isVertical = true;
   @Output() videoFileSelected = new EventEmitter<File | null>();
   @Output() personFileSelected = new EventEmitter<File | null>();
+  @Output() orientationToggled = new EventEmitter<void>();
 
   isDraggingVideo = false;
   isDraggingPerson = false;

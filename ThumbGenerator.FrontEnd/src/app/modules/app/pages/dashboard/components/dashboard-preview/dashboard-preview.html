@@ -1,13 +1,14 @@
-<div class="flex flex-col gap-3 mx-auto max-w-[320px]">
+<div class="flex flex-col gap-3 mx-auto" [ngClass]="isVertical ? 'max-w-[320px]' : 'max-w-[480px]'">
     <div class="flex items-center gap-2 px-1">
         <span class="material-symbols-outlined text-primary text-lg">smartphone</span>
         <h3 class="text-text-main-light dark:text-white text-sm font-bold tracking-tight">Preview da Thumb</h3>
+        <span class="text-text-secondary-light dark:text-text-secondary text-xs ml-auto">{{ isVertical ? '9:16' : '16:9'
+            }}</span>
     </div>
 
-    <div
-        class="bg-black rounded-[2.5rem] border-[10px] border-slate-900 dark:border-slate-800 
-        overflow-hidden shadow-2xl relative ring-4 ring-slate-900/10 transition-all duration-300">
-        <div class="preview-stage">
+    <div class="bg-black overflow-hidden shadow-2xl relative ring-4 ring-slate-900/10 transition-all duration-300"
+        [ngClass]="isVertical ? 'rounded-[2.5rem] border-[10px] border-slate-900 dark:border-slate-800' : 'rounded-xl border-4 border-slate-800'">
+        <div class="preview-stage" [ngClass]="isVertical ? 'aspect-[9/16]' : 'aspect-video'">
             <div #stageHost class="stage-host"></div>
         </div>
     </div>

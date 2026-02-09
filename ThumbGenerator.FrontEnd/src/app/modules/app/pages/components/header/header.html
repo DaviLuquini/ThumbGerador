@@ -1,0 +1,29 @@
+<header
+    class="flex items-center justify-between px-6 py-4 border-b border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark sticky top-0 z-20 transition-colors duration-200">
+    <!-- Mobile Menu functionality -->
+    <div class="flex items-center gap-4 lg:hidden">
+        <span (click)="menuToggled.emit()"
+            class="material-symbols-outlined text-text-main-light dark:text-white cursor-pointer hover:bg-black/5 dark:hover:bg-white/5 rounded-full p-1 transition-colors">menu</span>
+        <span class="text-text-main-light dark:text-white font-bold text-lg">ThumbGerador</span>
+    </div>
+
+    <!-- Desktop Title/Subtitle -->
+    <div class="hidden lg:flex flex-col">
+        <h1 class="text-text-main-light dark:text-white font-bold text-xl">{{ title }}</h1>
+        @if(subtitle){
+        <p class="text-text-secondary-light dark:text-text-secondary text-xs">{{ subtitle }}</p>
+        }
+    </div>
+
+    <!-- Actions Slot -->
+    <div class="flex items-center gap-4 ml-auto">
+        <button (click)="toggleTheme()"
+            class="p-2 text-text-secondary-light dark:text-text-secondary hover:text-primary dark:hover:text-white transition-colors rounded-full hover:bg-surface-light dark:hover:bg-surface-card">
+            @if (themeService.isDark()) {
+            <span class="material-symbols-outlined text-[24px]">light_mode</span>
+            } @else {
+            <span class="material-symbols-outlined text-[24px]">dark_mode</span>
+            }
+        </button>
+    </div>
+</header>

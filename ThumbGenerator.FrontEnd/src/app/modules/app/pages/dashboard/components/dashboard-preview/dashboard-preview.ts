@@ -80,13 +80,33 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
   @Input() title = '';
   @Input() selectedTemplateId: TemplateId = 'faixa-vermelha';
   @Input() enhanceAi = false;
+  @Input() isVertical = true;
 
-  readonly W = 1080;
-  readonly H = 1920;
+  // Dimensões base para vertical (9:16)
+  W = 1080;
+  H = 1920;
 
-  readonly TOP: Rect = { x: 0, y: 0, width: this.W, height: 1080 };
-  readonly BANNER: Rect = { x: 0, y: 420, width: this.W, height: 1280 };
-  readonly BOTTOM: Rect = { x: 0, y: 1100, width: this.W, height: 820 };
+  TOP: Rect = { x: 0, y: 0, width: this.W, height: 1080 };
+  BANNER: Rect = { x: 0, y: 420, width: this.W, height: 1280 };
+  BOTTOM: Rect = { x: 0, y: 1100, width: this.W, height: 820 };
+
+  private updateDimensions() {
+    if (this.isVertical) {
+      // 9:16
+      this.W = 1080;
+      this.H = 1920;
+      this.TOP = { x: 0, y: 0, width: this.W, height: 1080 };
+      this.BANNER = { x: 0, y: 420, width: this.W, height: 1280 };
+      this.BOTTOM = { x: 0, y: 1100, width: this.W, height: 820 };
+    } else {
+      // 16:9
+      this.W = 1920;
+      this.H = 1080;
+      this.TOP = { x: 0, y: 0, width: 960, height: this.H };
+      this.BANNER = { x: 320, y: 0, width: 1280, height: this.H };
+      this.BOTTOM = { x: 960, y: 0, width: 960, height: this.H };
+    }
+  }
 
   private stage?: Konva.Stage;
   private layer?: Konva.Layer;
@@ -117,6 +137,13 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
   async ngOnChanges(changes: SimpleChanges) {
     if (!this.stage) return;
 
+    if (changes['isVertical']) {
+      this.updateDimensions();
+      this.initStage();
+      // createStage (called by initStage via setTimeout) will handle all rendering
+      return;
+    }
+
     if (changes['selectedTemplateId']) {
       await this.applyTemplateAssets();
     }
@@ -141,22 +168,51 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private initStage() {
-    const width = this.stageHost.nativeElement.clientWidth || 320;
-    const scale = width / this.W;
-    const previewHeight = this.H * scale;
+    // Destroy existing stage if any
+    if (this.stage) {
+      this.stage.destroy();
+      this.stage = undefined;
+      this.layer = undefined;
+    }
 
-    this.stageHost.nativeElement.style.height = `${previewHeight}px`;
+    // Clear any previous inline styles
+    this.stageHost.nativeElement.style.height = '';
+    this.stageHost.nativeElement.style.width = '';
+
+    // Use setTimeout to ensure CSS has applied the new aspect ratio
+    setTimeout(() => {
+      this.createStage();
+    }, 0);
+  }
+
+  private createStage() {
+    const containerWidth = this.stageHost.nativeElement.clientWidth || 300;
+
+    // Calculate height based on aspect ratio (don't rely on CSS-computed height)
+    const aspectRatio = this.isVertical ? (16 / 9) : (9 / 16);
+    const containerHeight = containerWidth * aspectRatio;
+
+    const scale = containerWidth / this.W;
+
+    this.stageHost.nativeElement.style.height = `${containerHeight}px`;
 
     this.stage = new Konva.Stage({
       container: this.stageHost.nativeElement,
-      width,
-      height: previewHeight,
+      width: containerWidth,
+      height: containerHeight,
     });
 
     this.stage.scale({ x: scale, y: scale });
 
     this.layer = new Konva.Layer();
     this.stage.add(this.layer);
+
+    // Re-render after stage is created
+    this.renderStaticLayout();
+    this.applyTemplateAssets();
+    this.updateTitle();
+    this.updateVideoImage();
+    this.updatePersonImage();
   }
 
   private renderStaticLayout() {

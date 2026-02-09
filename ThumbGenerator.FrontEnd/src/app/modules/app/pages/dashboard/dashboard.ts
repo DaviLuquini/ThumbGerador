@@ -9,6 +9,8 @@ import { DashboardStepUploads } from './components/step-uploads/step-uploads';
 import { DashboardStepTextConfig } from './components/step-text-config/step-text-config';
 import { DashboardStepTemplateStyle } from './components/step-template-style/step-template-style';
 import { DashboardPreview } from './components/dashboard-preview/dashboard-preview';
+import { Sidebar } from '../components/sidebar/sidebar';
+import { Header } from '../components/header/header';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,6 +20,8 @@ import { DashboardPreview } from './components/dashboard-preview/dashboard-previ
     DashboardStepTemplateStyle,
     DashboardStepUploads,
     DashboardPreview,
+    Sidebar,
+    Header,
   ],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.scss',
@@ -29,10 +33,24 @@ export class Dashboard {
 
   selectedTemplateId: TemplateId = 'faixa-vermelha';
   enhanceAi = false;
+  isVertical = true;
   videoFile: File | null = null;
   personFile: File | null = null;
   title = '';
   promptText = '';
+
+  toggleOrientation() {
+    this.isVertical = !this.isVertical;
+    // Reset to first template of new orientation
+    if (this.isVertical) {
+      this.selectedTemplateId = 'faixa-vermelha';
+    } else {
+      this.selectedTemplateId = 'youtube-classico';
+    }
+    // Reset enhance and prompt
+    this.enhanceAi = false;
+    this.promptText = '';
+  }
 
   isGenerating = signal(false);
   generatedImageUrl = signal<string | null>(null);
@@ -113,9 +131,5 @@ export class Dashboard {
         }
       }
     });
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 }

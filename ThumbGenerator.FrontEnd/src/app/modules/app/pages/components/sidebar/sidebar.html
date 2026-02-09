@@ -1,0 +1,57 @@
+<aside
+    class="flex w-72 flex-col border-r border-border-light dark:border-border-dark bg-surface-light dark:bg-background-dark h-full transition-colors duration-200">
+    <div class="p-6 pb-2">
+        <div class="flex items-center gap-3 text-text-main-light dark:text-white mb-8">
+            <div class="size-8 text-primary">
+                <svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                        fill="currentColor"></path>
+                </svg>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">ThumbGerador</h2>
+        </div>
+        <div
+            class="flex items-center gap-3 p-3 rounded-lg bg-white dark:bg-surface-card border border-border-light dark:border-border-dark mb-6 shadow-sm">
+            <div class="bg-primary/20 rounded-full size-10 flex-shrink-0 flex items-center justify-center">
+                <span class="text-primary font-bold text-lg">{{ authService.user()?.name?.charAt(0)?.toUpperCase()
+                    || 'U' }}</span>
+            </div>
+            <div class="flex flex-col overflow-hidden">
+                <h1 class="text-text-main-light dark:text-white text-sm font-semibold truncate">{{
+                    authService.user()?.name || 'Usuário' }}</h1>
+                <p class="text-primary text-xs font-medium">Saldo: {{ authService.credits() }} Créditos</p>
+            </div>
+        </div>
+    </div>
+    <nav class="flex-1 px-4 space-y-2 overflow-y-auto">
+        <a routerLink="/app/dashboard" routerLinkActive="bg-primary/10 text-primary border-primary/20 shadow-sm"
+            [routerLinkActiveOptions]="{exact: true}"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors border border-transparent text-text-secondary-light dark:text-text-secondary hover:text-primary dark:hover:text-white hover:bg-white dark:hover:bg-surface-card hover:border-border-light dark:hover:border-border-dark">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+            <span class="text-sm font-medium">Dashboard</span>
+        </a>
+        <a routerLink="/app/history" routerLinkActive="bg-primary/10 text-primary border-primary/20 shadow-sm"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors border border-transparent text-text-secondary-light dark:text-text-secondary hover:text-primary dark:hover:text-white hover:bg-white dark:hover:bg-surface-card hover:border-border-light dark:hover:border-border-dark">
+            <span class="material-symbols-outlined text-[20px]">history</span>
+            <span class="text-sm font-medium">Histórico</span>
+        </a>
+        <a routerLink="/app/templates" routerLinkActive="bg-primary/10 text-primary border-primary/20 shadow-sm"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors border border-transparent text-text-secondary-light dark:text-text-secondary hover:text-primary dark:hover:text-white hover:bg-white dark:hover:bg-surface-card hover:border-border-light dark:hover:border-border-dark">
+            <span class="material-symbols-outlined text-[20px]">grid_view</span>
+            <span class="text-sm font-medium">Templates</span>
+        </a>
+        <a routerLink="/app/settings" routerLinkActive="bg-primary/10 text-primary border-primary/20 shadow-sm"
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors border border-transparent text-text-secondary-light dark:text-text-secondary hover:text-primary dark:hover:text-white hover:bg-white dark:hover:bg-surface-card hover:border-border-light dark:hover:border-border-dark">
+            <span class="material-symbols-outlined text-[20px]">settings</span>
+            <span class="text-sm font-medium">Configurações</span>
+        </a>
+    </nav>
+    <div class="p-4 border-t border-border-light dark:border-border-dark">
+        <button (click)="logout()"
+            class="flex w-full items-center gap-3 px-3 py-2 text-text-secondary-light dark:text-text-secondary hover:text-primary dark:hover:text-white transition-colors text-sm font-medium rounded-lg hover:bg-white dark:hover:bg-surface-card">
+            <span class="material-symbols-outlined text-[20px]">logout</span>
+            Sair
+        </button>
+    </div>
+</aside>

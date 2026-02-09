@@ -65,6 +65,10 @@ export class ThumbnailService {
         return this.http.get<ThumbnailHistoryItem[]>(`${environment.apiUrl}/thumbnail/history`);
     }
 
+    getById(id: string): Observable<ThumbnailHistoryItem> {
+        return this.http.get<ThumbnailHistoryItem>(`${environment.apiUrl}/thumbnail/${id}`);
+    }
+
     getFullImageUrl(imageUrl: string): string {
         if (imageUrl.startsWith('http')) {
             return imageUrl;
