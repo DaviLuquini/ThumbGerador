@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './step-uploads.html',
   styleUrl: './step-uploads.scss',
 })
-export class DashboardStepUploads {
+export class DashboardStepUploads implements OnDestroy {
   @Input() isVertical = true;
   @Output() videoFileSelected = new EventEmitter<File | null>();
   @Output() personFileSelected = new EventEmitter<File | null>();
@@ -15,6 +15,14 @@ export class DashboardStepUploads {
 
   isDraggingVideo = false;
   isDraggingPerson = false;
+
+  firstImageUrl: string | null = null;
+  secondImageUrl: string | null = null;
+
+  ngOnDestroy() {
+    if (this.firstImageUrl) URL.revokeObjectURL(this.firstImageUrl);
+    if (this.secondImageUrl) URL.revokeObjectURL(this.secondImageUrl);
+  }
 
   openFilePicker(input: HTMLInputElement) {
     // Permite selecionar o mesmo arquivo novamente e ainda disparar change.
@@ -24,12 +32,14 @@ export class DashboardStepUploads {
 
   onPickVideo(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.videoFileSelected.emit(input.files?.[0] ?? null);
+    const file = input.files?.[0] ?? null;
+    this.handleVideoFile(file);
   }
 
   onPickPerson(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.personFileSelected.emit(input.files?.[0] ?? null);
+    const file = input.files?.[0] ?? null;
+    this.handlePersonFile(file);
   }
 
   onDragOver(event: DragEvent) {
@@ -54,10 +64,22 @@ export class DashboardStepUploads {
     const file = event.dataTransfer?.files?.[0] ?? null;
     if (kind === 'video') {
       this.isDraggingVideo = false;
-      this.videoFileSelected.emit(file);
+      this.handleVideoFile(file);
     } else {
       this.isDraggingPerson = false;
-      this.personFileSelected.emit(file);
+      this.handlePersonFile(file);
     }
+  }
+
+  private handleVideoFile(file: File | null) {
+    if (this.firstImageUrl) URL.revokeObjectURL(this.firstImageUrl);
+    this.firstImageUrl = file ? URL.createObjectURL(file) : null;
+    this.videoFileSelected.emit(file);
+  }
+
+  private handlePersonFile(file: File | null) {
+    if (this.secondImageUrl) URL.revokeObjectURL(this.secondImageUrl);
+    this.secondImageUrl = file ? URL.createObjectURL(file) : null;
+    this.personFileSelected.emit(file);
   }
 }

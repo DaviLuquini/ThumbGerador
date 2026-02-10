@@ -231,51 +231,34 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
       x: this.TOP.x,
       y: this.TOP.y,
       clip: { x: 0, y: 0, width: this.TOP.width, height: this.TOP.height },
-      listening: false,
     });
 
     this.personGroup = new Konva.Group({
       x: this.BOTTOM.x,
       y: this.BOTTOM.y,
       clip: { x: 0, y: 0, width: this.BOTTOM.width, height: this.BOTTOM.height },
-      listening: false,
     });
 
     this.titleText = new Konva.Text({
-      x: this.BANNER.x + 40,
-      y: this.BANNER.y + 20,
-      width: this.BANNER.width - 80,
-      height: this.BANNER.height - 40,
       text: '',
       fontFamily: 'Space Grotesk',
       fontStyle: '700',
       fontSize: 110,
-      align: 'center',
-      verticalAlign: 'middle',
       fill: '#fff',
       stroke: '#000',
       strokeWidth: 4,
       lineJoin: 'round',
-      draggable: false,
-    });
-
-    this.placeholderText = new Konva.Text({
-      x: 0,
-      y: 0,
-      width: this.W,
-      height: this.H,
-      text: 'Preview será gerado aqui',
-      fontFamily: 'Space Grotesk',
-      fontStyle: '600',
-      fontSize: 48,
+      draggable: true,
       align: 'center',
-      verticalAlign: 'middle',
-      fill: '#ffffff',
-      listening: false,
     });
+    this.addCursorStyling(this.titleText);
+
+    // ... (placeholderText stays same)
 
     this.rebuildLayer();
   }
+
+  // ...
 
   private async applyTemplateAssets() {
     if (!this.layer) return;
@@ -298,8 +281,15 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
           width: this.BANNER.width,
           height: this.BANNER.height,
           image: bannerImg,
-          draggable: false,
+          draggable: true,
+          hitFunc: (context, shape) => {
+            context.beginPath();
+            context.rect(0, 150, shape.width(), shape.height() - 300);
+            context.closePath();
+            context.fillStrokeShape(shape);
+          },
         });
+        this.addCursorStyling(this.bannerImg);
       } catch (err) {
         console.warn('Banner image failed to load:', err);
       }
@@ -328,26 +318,6 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
 
   private get isPromptTemplate(): boolean {
     return this.selectedTemplateId === 'prompt';
-  }
-
-  private updateTitle() {
-    if (!this.titleText) return;
-
-    const value = (this.title || 'SEU TÍTULO AQUI').toUpperCase();
-    const fontSize = fitFontSize({
-      text: value,
-      maxWidth: this.BANNER.width - 80,
-      maxHeight: this.BANNER.height - 40,
-      fontFamily: 'Space Grotesk',
-      fontWeight: 700,
-      strokeWidth: 6,
-      startSize: 140,
-      minSize: 36,
-    });
-
-    this.titleText.text(value);
-    this.titleText.fontSize(fontSize);
-    this.layer?.batchDraw();
   }
 
   private async updateVideoImage() {
@@ -388,6 +358,48 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
     this.setImageInGroup('person', img, this.personGroup, this.BOTTOM);
   }
 
+  private updateTitle() {
+    if (!this.titleText) return;
+
+    const value = (this.title || 'SEU TÍTULO AQUI').toUpperCase();
+    const maxWidth = this.BANNER.width - 80;
+    const maxHeight = this.BANNER.height - 40;
+
+    const fontSize = fitFontSize({
+      text: value,
+      maxWidth: maxWidth,
+      maxHeight: maxHeight,
+      fontFamily: 'Space Grotesk',
+      fontWeight: 700,
+      strokeWidth: 6,
+      startSize: 140,
+      minSize: 36,
+    });
+
+    this.titleText.text(value);
+    this.titleText.fontSize(fontSize);
+
+    // Reset dimensions to auto to measure
+    this.titleText.width(null as any);
+    this.titleText.height(null as any);
+
+    // If text is wider than max, wrap it
+    if (this.titleText.width() > maxWidth) {
+      this.titleText.width(maxWidth);
+    }
+
+    // Center manually
+    const textWidth = this.titleText.width();
+    const textHeight = this.titleText.height();
+
+    this.titleText.x(this.BANNER.x + (this.BANNER.width - textWidth) / 2);
+    this.titleText.y(this.BANNER.y + (this.BANNER.height - textHeight) / 2);
+
+    this.layer?.batchDraw();
+  }
+
+  // ...
+
   private setImageInGroup(kind: 'video' | 'person', img: HTMLImageElement, group: Konva.Group, rect: Rect) {
     if (kind === 'video' && this.videoKonvaImg) {
       this.videoKonvaImg.destroy();
@@ -406,8 +418,10 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
       width: t.width,
       height: t.height,
       image: img,
-      draggable: false,
+      draggable: true,
     });
+    this.addCursorStyling(kImg);
+    this.addZoomBehavior(kImg);
 
     group.add(kImg);
 
@@ -415,5 +429,63 @@ export class DashboardPreview implements AfterViewInit, OnChanges, OnDestroy {
     else this.personKonvaImg = kImg;
 
     this.layer?.batchDraw();
+  }
+
+  private addCursorStyling(node: Konva.Node) {
+    node.on('mouseenter', () => {
+      this.stageHost.nativeElement.style.cursor = 'grab';
+    });
+
+    node.on('mouseleave', () => {
+      this.stageHost.nativeElement.style.cursor = 'default';
+    });
+
+    node.on('dragstart', () => {
+      this.stageHost.nativeElement.style.cursor = 'grabbing';
+    });
+
+    node.on('dragend', () => {
+      // Restore scale if needed or just cursor
+      this.stageHost.nativeElement.style.cursor = 'grab';
+    });
+  }
+
+  private addZoomBehavior(node: Konva.Node) {
+    node.on('wheel', (e) => {
+      // stop default scrolling
+      e.evt.preventDefault();
+
+      const scaleBy = 1.05;
+      const oldScale = node.scaleX();
+      const pointer = node.getRelativePointerPosition();
+
+      if (!pointer) return;
+
+      const mousePointTo = {
+        x: (pointer.x - node.x()) / oldScale,
+        y: (pointer.y - node.y()) / oldScale,
+      };
+
+      // how to scale? Zoom in? Or zoom out?
+      let direction = e.evt.deltaY > 0 ? -1 : 1;
+
+      // when we zoom on trackpad, e.evt.ctrlKey is true
+      // in that case lets revert direction
+      if (e.evt.ctrlKey) {
+        direction = -direction;
+      }
+
+      const newScale = direction > 0 ? oldScale * scaleBy : oldScale / scaleBy;
+
+      node.scale({ x: newScale, y: newScale });
+
+      const newPos = {
+        x: pointer.x - mousePointTo.x * newScale,
+        y: pointer.y - mousePointTo.y * newScale,
+      };
+      node.position(newPos);
+
+      this.layer?.batchDraw();
+    });
   }
 }

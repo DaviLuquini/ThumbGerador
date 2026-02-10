@@ -15,13 +15,13 @@
                 <span class="material-symbols-outlined text-[18px]">crop_portrait</span>
                 <span class="hidden sm:inline">Vertical</span>
             </button>
-            <button type="button"
+            <!-- <button type="button"
                 class="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200"
                 [ngClass]="!isVertical ? 'bg-primary text-white shadow-sm' : 'text-text-secondary-light dark:text-text-secondary hover:text-primary'"
                 (click)="isVertical && orientationToggled.emit()">
                 <span class="material-symbols-outlined text-[18px]">crop_landscape</span>
                 <span class="hidden sm:inline">Horizontal</span>
-            </button>
+            </button> -->
         </div>
     </div>
     <div
@@ -29,8 +29,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Video Image Upload -->
             <div class="flex flex-col gap-3">
-                <label class="text-sm font-medium text-text-main-light dark:text-white">Imagem
-                    do Vídeo
+                <label class="text-sm font-medium text-text-main-light dark:text-white">Imagem 1
                 </label>
                 <div class="group relative flex flex-col items-center justify-center w-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
                     [ngClass]="isVertical ? 'aspect-[3/4]' : 'aspect-video'" [class.border-primary]="isDraggingVideo"
@@ -39,6 +38,14 @@
                     (keydown.space)="$event.preventDefault(); openFilePicker(videoInput)"
                     (dragover)="onDragOver($event)" (dragenter)="onDragEnter('video', $event)"
                     (dragleave)="onDragLeave('video', $event)" (drop)="onDrop('video', $event)">
+                    @if (firstImageUrl) {
+                    <img [src]=" firstImageUrl" class="w-full h-full object-cover rounded-lg" alt="Preview da Imagem 1">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined text-white text-3xl mb-1">edit</span>
+                        <p class="text-white text-xs font-medium">Trocar imagem</p>
+                    </div>
+                    } @else {
                     <div
                         class="flex flex-col items-center justify-center text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-4xl mb-2">image</span>
@@ -46,13 +53,14 @@
                         <p class="text-[10px] mt-1 opacity-60">{{ isVertical ? '1080x1920 recomendado' : '1920x1080
                             recomendado' }}</p>
                     </div>
+                    }
                     <input #videoInput class="hidden" type="file" accept="image/*" (change)="onPickVideo($event)" />
                 </div>
             </div>
             <!-- Person Image Upload -->
             <div class="flex flex-col gap-3">
                 <label class="text-sm font-medium text-text-main-light dark:text-white flex justify-between">
-                    Foto da Pessoa
+                    Imagem 2
                 </label>
                 <div class="group relative flex flex-col items-center justify-center w-full border-2 border-dashed border-border-light dark:border-border-dark rounded-lg cursor-pointer bg-surface-light dark:bg-background-dark hover:border-primary transition-colors hover:bg-white dark:hover:bg-surface-dark focus:outline-none focus:ring-2 focus:ring-primary"
                     [ngClass]="isVertical ? 'aspect-[3/4]' : 'aspect-video'" [class.border-primary]="isDraggingPerson"
@@ -61,11 +69,20 @@
                     (keydown.space)="$event.preventDefault(); openFilePicker(personInput)"
                     (dragover)="onDragOver($event)" (dragenter)="onDragEnter('person', $event)"
                     (dragleave)="onDragLeave('person', $event)" (drop)="onDrop('person', $event)">
+                    @if (secondImageUrl) {
+                    <img [src]="secondImageUrl" class="w-full h-full object-cover rounded-lg" alt="Preview da Imagem 2">
+                    <div
+                        class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center rounded-lg">
+                        <span class="material-symbols-outlined text-white text-3xl mb-1">edit</span>
+                        <p class="text-white text-xs font-medium">Trocar imagem</p>
+                    </div>
+                    } @else {
                     <div
                         class="flex flex-col items-center justify-center text-text-secondary-light dark:text-text-secondary group-hover:text-primary transition-colors">
                         <span class="material-symbols-outlined text-4xl mb-2">person_add</span>
                         <p class="text-xs font-medium">Arraste ou clique para enviar</p>
                     </div>
+                    }
                     <input #personInput class="hidden" type="file" accept="image/*" (change)="onPickPerson($event)" />
                 </div>
             </div>

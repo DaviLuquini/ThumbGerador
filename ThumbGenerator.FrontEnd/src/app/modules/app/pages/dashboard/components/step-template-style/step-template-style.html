@@ -149,10 +149,9 @@
         class="bg-white dark:bg-surface-card rounded-xl p-5 border border-border-light dark:border-border-dark shadow-sm">
         <div class="flex items-center justify-between gap-4">
             <div>
-                <h3 class="text-text-main-light dark:text-white text-sm font-semibold">Enhance
-                    photo with AI</h3>
+                <h3 class="text-text-main-light dark:text-white text-sm font-semibold">Aprimorar a imagem com IA</h3>
                 <p class="text-text-secondary-light dark:text-text-secondary text-xs">
-                    Melhora recorte, luz e contraste. Custa +2 créditos.
+                    Deixe a imagem com o Tom da sua escolha. Custa +1 crédito.
                 </p>
             </div>
             <button (click)="enhanceToggled.emit()"
@@ -173,9 +172,16 @@
                         (click)="onSelectTone(tone.id)">
                         @if (isVertical) {
                         <!-- Phone Frame -->
-                        <div class="w-full bg-black rounded-[1rem] border-[4px] overflow-hidden shadow-xl ring-2 aspect-[9/16] transition-all duration-300"
+                        <div class="w-full bg-black rounded-[1rem] border-[4px] overflow-hidden shadow-xl ring-2 aspect-[9/16] transition-all duration-300 relative group/preview"
                             [ngClass]="selectedTone === tone.id ? 'border-primary ring-primary/30' : 'border-slate-700 ring-slate-900/10'">
+                            @if (tone.image) {
+                            <img [src]="tone.image" [alt]="tone.label" class="w-full h-full object-cover">
+                            } @else {
                             <div class="w-full h-full bg-gradient-to-b from-slate-800 to-black"></div>
+                            }
+                            <div
+                                class="absolute inset-0 bg-black/20 group-hover/preview:bg-transparent transition-all duration-300">
+                            </div>
                         </div>
                         } @else {
                         <div class="aspect-video w-full rounded-lg border-2 transition-all duration-300"
@@ -190,42 +196,14 @@
                 </div>
             </div>
 
-            <div class="flex flex-col gap-2">
+            <!-- TO-DO Reativar essa função mais pra frente. -->
+            <!-- <div class="flex flex-col gap-2">
                 <label class="text-sm font-medium text-text-main-light dark:text-white">Prompt para IA</label>
                 <textarea
                     class="w-full min-h-[90px] bg-surface-light dark:bg-background-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 text-text-main-light dark:text-white placeholder-text-secondary-light/50 dark:placeholder-text-secondary/50 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all"
                     placeholder="Descreva o ajuste que deseja aplicar..." [value]="promptText"
                     (input)="onPromptChange($any($event.target).value)"></textarea>
-            </div>
-
-            <div [ngClass]="isVertical ? 'flex justify-center gap-8' : 'grid grid-cols-2 gap-3'">
-                <!-- Antes -->
-                <div class="flex flex-col items-center gap-1.5" [ngClass]="isVertical ? 'w-32' : ''">
-                    @if (isVertical) {
-                    <div
-                        class="w-full bg-slate-200 dark:bg-slate-700 rounded-[1rem] border-[4px] border-slate-300 dark:border-slate-600 overflow-hidden shadow-xl ring-2 ring-slate-400/10 aspect-[9/16] flex items-center justify-center transition-all duration-300">
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400">Antes</span>
-                    </div>
-                    } @else {
-                    <div
-                        class="aspect-video w-full rounded-lg border-2 border-slate-300 dark:border-slate-600 bg-surface-light dark:bg-background-dark flex items-center justify-center text-xs text-text-secondary-light dark:text-text-secondary">
-                        Antes</div>
-                    }
-                </div>
-                <!-- Depois -->
-                <div class="flex flex-col items-center gap-1.5" [ngClass]="isVertical ? 'w-32' : ''">
-                    @if (isVertical) {
-                    <div
-                        class="w-full bg-primary/20 rounded-[1rem] border-[4px] border-primary ring-2 ring-primary/30 overflow-hidden shadow-xl aspect-[9/16] flex items-center justify-center transition-all duration-300">
-                        <span class="text-[10px] text-primary font-medium">Depois</span>
-                    </div>
-                    } @else {
-                    <div
-                        class="aspect-video w-full rounded-lg border-2 border-primary bg-primary/10 flex items-center justify-center text-xs text-primary">
-                        Depois (AI)</div>
-                    }
-                </div>
-            </div>
+            </div> -->
         </div>
         }
     </div>
