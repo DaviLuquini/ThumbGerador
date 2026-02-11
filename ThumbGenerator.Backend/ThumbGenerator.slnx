@@ -1,3 +1,5 @@
 <Solution>
-  <Project Path="ThumbGenerator.csproj" />
+  <Project Path="../ThumbGenerator.Domain/ThumbGenerator.Domain.csproj" Id="0beed7d2-59ca-4ea6-8a31-06cf5e13b812" />
+  <Project Path="../ThumbGenerator.Platform/ThumbGenerator.Platform.csproj" Id="658be995-0491-482b-8e2e-81e8f5ac0dd6" />
+  <Project Path="ThumbGenerator.API.csproj" />
 </Solution>

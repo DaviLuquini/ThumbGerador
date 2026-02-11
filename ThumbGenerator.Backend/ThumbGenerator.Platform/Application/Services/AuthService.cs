@@ -3,9 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using ThumbGenerator.Data;
 using ThumbGenerator.Domain.Entities;
 using ThumbGenerator.DTOs;
+using ThumbGenerator.Platform.Infrastructure.Database;
 
 namespace ThumbGenerator.Services;
 

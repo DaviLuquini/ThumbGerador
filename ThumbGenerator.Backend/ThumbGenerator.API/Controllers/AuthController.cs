@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ThumbGenerator.API.DTOs;
 using ThumbGenerator.DTOs;
 using ThumbGenerator.Services;
 
