@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap');
+
+:root {
+    --neon-pink: #ff0050;
+    --neon-cyan: #00f2fe;
+    --dark-bg: #000000;
+    --dark-surface: #0d0d0d;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* TikTok Glitch Effect */
+.tiktok-glitch {
+    position: relative;
+    display: inline-block;
+    z-index: 1;
+}
+
+.tiktok-glitch::before,
+.tiktok-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.tiktok-glitch::before {
+    color: var(--neon-cyan);
+    left: -4px;
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    text-shadow: 2px 0 var(--neon-pink);
+}
+
+.tiktok-glitch::after {
+    color: var(--neon-pink);
+    left: 4px;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    text-shadow: -2px 0 var(--neon-cyan);
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(20% 0 80% 0);
+        transform: translate(-4px, 2px) skewX(10deg);
+        filter: hue-rotate(90deg);
+    }
+
+    10% {
+        clip-path: inset(10% 0 50% 0);
+        transform: translate(4px, -2px) skewX(-20deg);
+        filter: invert(1);
+    }
+
+    20% {
+        clip-path: inset(60% 0 10% 0);
+        transform: translate(-4px, 1px) skewX(2deg);
+        filter: none;
+    }
+
+    30% {
+        clip-path: inset(40% 0 50% 0);
+        transform: translate(4px, -2px) skewX(-15deg);
+        filter: saturate(3);
+    }
+
+    40% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(-2px, 2px) skewX(5deg);
+        filter: hue-rotate(-90deg);
+    }
+
+    50% {
+        clip-path: inset(15% 0 90% 0);
+        transform: translate(2px, -1px) skewX(-5deg);
+        filter: none;
+    }
+
+    60% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translate(-3px, 1px) skewX(15deg);
+        filter: invert(0.8);
+    }
+
+    70% {
+        clip-path: inset(90% 0 5% 0);
+        transform: translate(3px, -2px) skewX(-10deg);
+        filter: saturate(5);
+    }
+
+    80% {
+        clip-path: inset(30% 0 50% 0);
+        transform: translate(-4px, 1px) skewX(5deg);
+        filter: none;
+    }
+
+    90% {
+        clip-path: inset(50% 0 20% 0);
+        transform: translate(2px, -3px) skewX(-5deg);
+        filter: hue-rotate(180deg);
+    }
+
+    100% {
+        clip-path: inset(5% 0 85% 0);
+        transform: translate(-2px, 2px) skewX(10deg);
+        filter: none;
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(4px, -2px) skewX(-10deg);
+        filter: none;
+    }
+
+    15% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(-4px, 2px) skewX(20deg);
+        filter: hue-rotate(90deg);
+    }
+
+    30% {
+        clip-path: inset(30% 0 20% 0);
+        transform: translate(4px, -2px) skewX(-5deg);
+        filter: invert(1);
+    }
+
+    45% {
+        clip-path: inset(70% 0 10% 0);
+        transform: translate(-3px, 1px) skewX(15deg);
+        filter: none;
+    }
+
+    60% {
+        clip-path: inset(5% 0 80% 0);
+        transform: translate(3px, -1px) skewX(-15deg);
+        filter: saturate(3);
+    }
+
+    75% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(-4px, 2px) skewX(5deg);
+        filter: hue-rotate(-90deg);
+    }
+
+    90% {
+        clip-path: inset(20% 0 70% 0);
+        transform: translate(2px, -3px) skewX(-10deg);
+        filter: invert(0.8);
+    }
+
+    100% {
+        clip-path: inset(85% 0 10% 0);
+        transform: translate(-2px, 1px) skewX(10deg);
+        filter: none;
+    }
+}
+
+.tiktok-shadow {
+    text-shadow: 3px 3px 0px var(--neon-cyan), -3px -3px 0px var(--neon-pink);
+}
+
+.tiktok-shadow-sm {
+    text-shadow: 2px 2px 0px var(--neon-cyan), -2px -2px 0px var(--neon-pink);
+}
+
+/* Mesh background */
+.mesh-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 80% 10%, rgba(255, 0, 80, 0.2) 0%, transparent 45%),
+        radial-gradient(circle at 20% 90%, rgba(0, 242, 254, 0.2) 0%, transparent 45%),
+        #000;
+    filter: blur(60px);
+}
+
+/* Noise grain */
+.noise-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="n"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23n)"/%3E%3C/svg%3E');
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+}
+
+/* Glassmorphism nav */
+.glass-nav {
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.75);
+}
+
+/* Bento card */
+.bento-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.75rem;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(16px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.bento-card:hover {
+    border-color: rgba(255, 255, 255, 0.18);
+    transform: translateY(-6px);
+    box-shadow:
+        0 20px 40px -10px rgba(0, 0, 0, 0.7),
+        -8px 8px 30px -8px rgba(0, 242, 254, 0.12),
+        8px -8px 30px -8px rgba(255, 0, 80, 0.12);
+}
+
+/* Gradient border mask — shows on hover */
+.gradient-border-mask {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: linear-gradient(135deg, var(--neon-cyan), transparent 35%, transparent 65%, var(--neon-pink));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.bento-card:hover .gradient-border-mask {
+    opacity: 1;
+}
+
+/* Primary CTA button — white with TikTok offset shadow */
+.btn-tiktok {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.875rem 2.25rem;
+    background: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 5px 5px 0px var(--neon-cyan), -5px -5px 0px var(--neon-pink);
+    user-select: none;
+}
+
+.btn-tiktok:hover {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0px var(--neon-cyan), -2px -2px 0px var(--neon-pink);
+}
+
+.btn-tiktok:active {
+    transform: translate(5px, 5px);
+    box-shadow: none;
+}
+
+/* Outline CTA button */
+.btn-tiktok-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.875rem 2.25rem;
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+.btn-tiktok-outline:hover {
+    background: #fff;
+    color: #000;
+    border-color: transparent;
+    box-shadow: 5px 5px 0px var(--neon-cyan), -5px -5px 0px var(--neon-pink);
+    transform: translate(3px, 3px);
+}
+
+/* TikTok offset box */
+.tiktok-box {
+    box-shadow: 5px 5px 0px var(--neon-cyan), -5px -5px 0px var(--neon-pink);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Marquee */
+.marquee-container {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 1.5rem;
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    gap: 1.5rem;
+    min-width: 100%;
+    animation: scrollX 22s linear infinite;
+}
+
+.marquee-container:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+@keyframes scrollX {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(calc(-100% - 1.5rem));
+    }
+}
+
+/* Tilt on hover */
+.image-tilt {
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.image-tilt:hover {
+    transform: perspective(1200px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+}

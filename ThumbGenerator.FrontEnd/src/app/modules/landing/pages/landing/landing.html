@@ -1,450 +1,545 @@
-<div
-    class="relative bg-background-light dark:bg-background-dark text-text-main-light dark:text-text-main-dark transition-colors duration-200">
+<div class="relative min-h-screen bg-black text-white font-[Plus_Jakarta_Sans] overflow-x-hidden">
+    <div class="mesh-bg"></div>
+    <div class="noise-overlay"></div>
 
-    <!-- Background Gradient Decorations -->
-    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        <div
-            class="absolute -top-40 -right-40 w-[700px] h-[700px] bg-gradient-to-br from-primary/20 via-accent/10 to-transparent rounded-full blur-3xl animate-float">
-        </div>
-        <div
-            class="absolute top-1/3 -left-60 w-[600px] h-[600px] bg-gradient-to-tr from-primary-light/15 via-primary/10 to-transparent rounded-full blur-3xl">
-        </div>
-        <div
-            class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-t from-primary-dark/10 to-transparent rounded-full blur-3xl">
-        </div>
-    </div>
-
-    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-        <!-- TopNavBar -->
-        <header
-            class="sticky top-0 z-50 w-full border-b border-border-light dark:border-border-dark bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-xl">
-            <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-                <div class="flex items-center gap-3">
-                    <div
-                        class="flex items-center justify-center size-10 rounded-xl bg-gradient-to-br from-primary to-primary-light text-white shadow-lg shadow-primary/25">
-                        <span class="material-symbols-outlined text-xl">auto_awesome_motion</span>
-                    </div>
-                    <h2
-                        class="text-xl font-bold leading-tight tracking-tight text-text-main-light dark:text-text-main-dark font-display">
-                        ThumbGerador
-                    </h2>
+    <!-- Navbar -->
+    <header class="fixed top-0 left-0 right-0 z-50 glass-nav">
+        <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-black tiktok-box">
+                    <span class="material-symbols-outlined font-black text-xl">play_arrow</span>
                 </div>
-                <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors duration-200"
-                        href="#">Preços</a>
-                    <a class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors duration-200"
-                        href="#">Tutorial</a>
-                    <a class="text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-primary transition-colors duration-200"
-                        href="#">Templates</a>
-                </nav>
-                <div class="flex items-center gap-3">
-                    <button (click)="themeService.toggle()"
-                        class="flex h-10 w-10 items-center justify-center rounded-xl text-text-main-light dark:text-text-main-dark hover:bg-primary/5 dark:hover:bg-white/5 transition-all duration-200 border border-transparent hover:border-primary/20"
-                        aria-label="Toggle theme">
-                        @if (themeService.isDark()) {
-                        <span class="material-symbols-outlined text-[20px]">light_mode</span>
-                        } @else {
-                        <span class="material-symbols-outlined text-[20px]">dark_mode</span>
-                        }
-                    </button>
-                    <button
-                        class="hidden sm:flex h-10 px-5 items-center justify-center rounded-xl text-sm font-semibold text-text-main-light dark:text-text-main-dark hover:bg-primary/5 dark:hover:bg-white/5 transition-all duration-200 border border-transparent hover:border-primary/20">
-                        Login
-                    </button>
-                    <button
-                        class="flex h-10 px-6 items-center justify-center rounded-xl bg-gradient-to-r from-primary to-primary-light text-white text-sm font-bold hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300">
-                        Criar thumbnail
-                    </button>
+                <span
+                    class="font-[Outfit] font-black text-2xl tracking-tighter uppercase tiktok-shadow-sm">ThumbGerador</span>
+            </div>
+
+            <!-- Nav links -->
+            <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm text-white/70">
+                <a href="#" class="hover:text-[var(--neon-pink)] transition-colors duration-200">Preços</a>
+                <a href="https://github.com/DaviLuquini/ThumbGenerator" target="_blank"
+                    class="hover:text-[var(--neon-cyan)] transition-colors duration-200">Github</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-4">
+                <a href="#"
+                    class="hidden sm:block font-bold text-white/70 hover:text-[var(--neon-pink)] transition-colors text-sm">Entrar</a>
+                <a href="#" class="btn-tiktok text-sm !px-6 !py-2.5">Cadastrar</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
+    <section class="relative pt-40 pb-24 px-6 max-w-[1400px] mx-auto text-center z-10">
+        <div class="flex flex-col items-center gap-6">
+
+            <!-- Badge (preserved) -->
+            <div
+                class="inline-flex items-center gap-2 rounded-full bg-white/5 border border-white/15 px-4 py-2 hover:border-[var(--neon-cyan)] transition-all duration-300 cursor-pointer">
+                <span class="text-xs font-medium text-white/60">Powered by</span>
+                <span class="flex items-center gap-1 text-xs font-bold text-yellow-400">
+                    Nano Banana Pro <span class="text-base leading-none">🍌</span>
+                </span>
+                <svg class="h-4 w-4 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                        fill="#4285F4" />
+                    <path
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                        fill="#34A853" />
+                    <path
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+                        fill="#FBBC05" />
+                    <path
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                        fill="#EA4335" />
+                </svg>
+            </div>
+
+            <!-- Headline -->
+            <h1
+                class="font-[Outfit] font-black text-6xl sm:text-7xl lg:text-8xl tracking-tight leading- max-w-5xl uppercase mt-2">
+                CRIE CAPAS <span class="tiktok-glitch text-[var(--neon-pink)] drop-shadow-[0_0_15px_rgba(255,0,80,0.8)]"
+                    data-text="VIRAIS">VIRAIS</span>
+                <br class="hidden sm:block" />
+                QUE EXPLODEM EM VIEWS
+            </h1>
+
+            <!-- Sub -->
+            <p class="text-lg sm:text-xl font-medium max-w-2xl text-white/70 mt-4 leading-relaxed">
+                Gere thumbnails com qualidade de estúdio para YouTube e TikTok que
+                <span class="font-bold text-[var(--neon-pink)]">chamam atenção</span> e multiplicam cliques em segundos.
+                <br /><span class="font-bold text-white">Zero habilidades de design necessárias.</span>
+            </p>
+
+            <!-- CTA row -->
+            <div class="flex flex-col sm:flex-row items-center gap-4 mt-8">
+                <a href="#" class="btn-tiktok text-base w-full sm:w-auto">Gerar Thumbnails</a>
+                <a href="#" class="btn-tiktok-outline text-base w-full sm:w-auto">Testar Grátis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════ FEATURES ══════════════════════════════════ -->
+    <section class="py-24 px-6 max-w-[1400px] mx-auto z-10 relative">
+        <div class="mb-16">
+            <h2 class="font-[Outfit] font-black text-5xl sm:text-6xl tracking-tighter mb-4 uppercase">
+                Nunca mais perca <span class="text-[var(--neon-cyan)] tiktok-shadow-sm">cliques.</span>
+            </h2>
+            <p class="text-lg max-w-2xl text-white/60 font-medium">
+                Crie thumbnails que param a atenção instantaneamente usando IA e decole seu CTR.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+
+            <!-- Feature 1 -->
+            <div class="bento-card p-8 lg:col-span-2 group cursor-default">
+                <div class="gradient-border-mask"></div>
+                <div
+                    class="w-16 h-16 rounded-2xl bg-[rgba(0,242,254,0.12)] text-[var(--neon-cyan)] flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-4xl">bolt</span>
+                </div>
+                <h3 class="font-[Outfit] font-black text-3xl mb-3 tracking-tight">Geração Instantânea</h3>
+                <p class="text-white/60 font-medium text-lg max-w-md leading-relaxed">
+                    Envie seu link e receba infinitas variações brutais pra testar em segundos.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="bento-card p-8 group cursor-default">
+                <div class="gradient-border-mask"></div>
+                <div
+                    class="w-16 h-16 rounded-2xl bg-[rgba(255,0,80,0.12)] text-[var(--neon-pink)] flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-4xl">local_fire_department</span>
+                </div>
+                <h3 class="font-[Outfit] font-black text-3xl mb-3 tracking-tight">Templates Validados</h3>
+                <p class="text-white/60 font-medium text-lg leading-relaxed">
+                    Frameworks virais de design usados por canais monstros pra fisgar o cérebro humano.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bento-card p-8 group cursor-default">
+                <div class="gradient-border-mask"></div>
+                <div
+                    class="w-16 h-16 rounded-2xl bg-[rgba(250,204,21,0.12)] text-yellow-400 flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-4xl">face_retouching_natural</span>
+                </div>
+                <h3 class="font-[Outfit] font-black text-3xl mb-3 tracking-tight">Detecção Facial Smart</h3>
+                <p class="text-white/60 font-medium text-lg leading-relaxed">
+                    Pesca suas melhores expressões e recorta perfeitamente preservando sombras e detalhes.
+                </p>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="bento-card p-8 group cursor-default">
+                <div class="gradient-border-mask"></div>
+                <div
+                    class="w-16 h-16 rounded-2xl bg-[rgba(168,85,247,0.12)] text-purple-400 flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-4xl">science</span>
+                </div>
+                <h3 class="font-[Outfit] font-black text-3xl mb-3 tracking-tight">Feito para Teste A/B</h3>
+                <p class="text-white/60 font-medium text-lg leading-relaxed">
+                    Produza 5 capas no tempo que levava pra fazer 1 e descubra a vencedora.
+                </p>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="bento-card p-8 group cursor-default">
+                <div class="gradient-border-mask"></div>
+                <div
+                    class="w-16 h-16 rounded-2xl bg-[rgba(34,197,94,0.12)] text-green-400 flex items-center justify-center mb-6">
+                    <span class="material-symbols-outlined text-4xl">hd</span>
+                </div>
+                <h3 class="font-[Outfit] font-black text-3xl mb-3 tracking-tight">Arquivos em 4K</h3>
+                <p class="text-white/60 font-medium text-lg leading-relaxed">
+                    Artes com super resolução prontas pra renderizar nas telas do YT e TikTok.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════ HOW IT WORKS ══════════════════════════════════ -->
+    <section class="py-24 relative overflow-hidden border-y border-white/[0.06]">
+        <!-- subtle pink radial at top -->
+        <div
+            class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-10%,rgba(255,0,80,0.12),transparent_60%)] pointer-events-none">
+        </div>
+
+        <div class="max-w-[1400px] mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16 items-center">
+
+            <!-- Left: text + steps -->
+            <div class="lg:w-1/2">
+                <h2
+                    class="font-[Outfit] font-black text-5xl sm:text-6xl tracking-tighter mb-6 uppercase tiktok-shadow leading-[1.05]">
+                    A mecânica do clique <br />revelada.
+                </h2>
+                <p class="text-lg text-white/60 mb-12 font-medium leading-relaxed">
+                    A IA devora os canais gigantes do seu nicho e te devolve layouts prontos que simplesmente engolem e
+                    oprimem templates básicos no feed.
+                </p>
+
+                <div class="space-y-8">
+                    <!-- Step 1 -->
+                    <div class="flex gap-5 group cursor-default">
+                        <div
+                            class="shrink-0 w-14 h-14 rounded-full border-2 border-[var(--neon-cyan)] text-[var(--neon-cyan)] flex items-center justify-center font-[Outfit] font-black text-2xl group-hover:bg-[var(--neon-cyan)] group-hover:text-black transition-all duration-300 shadow-[0_0_20px_rgba(0,242,254,0.25)]">
+                            1</div>
+                        <div>
+                            <h4
+                                class="font-[Outfit] font-black text-2xl mb-1 group-hover:text-[var(--neon-cyan)] transition-colors duration-200 tracking-tight">
+                                Importe o hype</h4>
+                            <p class="text-white/55 text-base leading-relaxed">Cole um link, suba vídeo ou transcreva.
+                                Extraímos os frames mais brutais em 3 segundos.</p>
+                        </div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="flex gap-5 group cursor-default">
+                        <div
+                            class="shrink-0 w-14 h-14 rounded-full border-2 border-purple-500 text-purple-400 flex items-center justify-center font-[Outfit] font-black text-2xl group-hover:bg-purple-500 group-hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+                            2</div>
+                        <div>
+                            <h4
+                                class="font-[Outfit] font-black text-2xl mb-1 group-hover:text-purple-400 transition-colors duration-200 tracking-tight">
+                                Personalize o caos</h4>
+                            <p class="text-white/55 text-base leading-relaxed">Ajuste textos absurdos, efeitos neon,
+                                luzes ou mude fisionomias. Sem encostar em layer mask.</p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="flex gap-5 group cursor-default">
+                        <div
+                            class="shrink-0 w-14 h-14 rounded-full border-2 border-[var(--neon-pink)] text-[var(--neon-pink)] flex items-center justify-center font-[Outfit] font-black text-2xl group-hover:bg-[var(--neon-pink)] group-hover:text-white transition-all duration-300 shadow-[0_0_20px_rgba(255,0,80,0.25)]">
+                            3</div>
+                        <div>
+                            <h4
+                                class="font-[Outfit] font-black text-2xl mb-1 group-hover:text-[var(--neon-pink)] transition-colors duration-200 tracking-tight">
+                                Teste A/B agressivo</h4>
+                            <p class="text-white/55 text-base leading-relaxed">Exporte o batalhão de capas em 4K
+                                blindado e deixe a audiência decidir qual clicará sem dó.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <a href="#" class="btn-tiktok text-base">Gerar Thumbnails</a>
                 </div>
             </div>
-        </header>
 
-        <main class="flex-1">
-            <!-- HeroSection -->
-            <section class="relative py-12 overflow-hidden">
-                <!-- Hero gradient accent -->
-                <div class="absolute inset-0 -z-10">
-                    <div
-                        class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-[600px] bg-gradient-to-b from-primary/8 via-accent/5 to-transparent rounded-full blur-3xl">
-                    </div>
-                </div>
-
-                <div class="mx-auto max-w-7xl px-6">
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        <div class="flex flex-col gap-8 max-w-xl">
-                            <div class="flex flex-col gap-6">
-                                <!-- Badge -->
-                                <div
-                                    class="animate-fade-in-up inline-flex items-center gap-2 self-start rounded-full bg-primary/5 dark:bg-primary/10 border border-primary/20 px-4 py-2 shadow-sm hover:shadow-md hover:border-primary/40 transition-all duration-300 cursor-pointer">
-                                    <span
-                                        class="text-xs font-medium text-text-secondary-light dark:text-text-secondary-dark">
-                                        Powered by
-                                    </span>
-                                    <span
-                                        class="flex items-center gap-1 text-xs font-bold text-yellow-600 dark:text-yellow-400">
-                                        Nano Banana Pro <span class="text-lg leading-none">🍌</span>
-                                    </span>
-                                    <svg class="h-4 w-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                            fill="#4285F4" />
-                                        <path
-                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                            fill="#34A853" />
-                                        <path
-                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                                            fill="#FBBC05" />
-                                        <path
-                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                            fill="#EA4335" />
-                                    </svg>
-                                </div>
-
-                                <!-- Headline -->
-                                <h1
-                                    class="animate-fade-in-up-delay-1 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.1] tracking-[-0.03em] text-text-main-light dark:text-text-main-dark font-display">
-                                    Gere thumbnails virais em
-                                    <span
-                                        class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-accent">30
-                                        segundos</span>
-                                </h1>
-
-                                <!-- Description -->
-                                <p
-                                    class="animate-fade-in-up-delay-2 text-lg text-text-secondary-light dark:text-text-secondary-dark leading-relaxed max-w-md">
-                                    A ferramenta definitiva para criadores de conteúdo vertical. Sem edição manual,
-                                    apenas upload e download. Perfeito para Shorts, Reels e <span
-                                        class="font-bold text-text-main-light dark:text-text-main-dark">TikTok</span>.
-                                </p>
-                            </div>
-
-                            <!-- CTA Buttons -->
-                            <div class="animate-fade-in-up-delay-3 flex flex-col sm:flex-row gap-4">
-                                <button class="group flex h-14 px-8 items-center justify-center rounded-xl 
-                                    bg-gradient-to-r from-primary to-primary-light text-white text-base 
-                                    font-bold hover:shadow-xl hover:shadow-primary/30 
-                                    hover:-translate-y-1 hover:cursor-pointer transition-all duration-300">
-                                    Começar agora
-                                    <span
-                                        class="material-symbols-outlined ml-2 group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                                </button>
-                                <button
-                                    class="flex h-14 px-8 items-center justify-center rounded-xl border-2 border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark text-text-main-light dark:text-text-main-dark text-base font-bold hover:border-primary/50 hover:bg-primary/5 transition-all duration-300">
-                                    <span class="material-symbols-outlined mr-2 text-primary">play_circle</span>
-                                    Ver demo
-                                </button>
-                            </div>
-
-                            <!-- Trust Badge -->
-                            <div
-                                class="animate-fade-in-up-delay-4 flex items-center gap-3 text-sm text-text-secondary-light dark:text-text-secondary-dark">
-                                <span class="material-symbols-outlined text-green-500 text-xl">verified</span>
-                                <span>Qualidade e preço justo</span>
-                                <span class="w-1 h-1 rounded-full bg-text-secondary-light/50"></span>
-                                <span>+5.000 Thumbnails geradas</span>
-                            </div>
-                        </div>
-
-                        <!-- Hero Image -->
-                        <div
-                            class="animate-slide-in-right relative w-full aspect-[4/3] lg:aspect-square max-h-[600px] flex justify-center items-center">
-                            <!-- Decorative blur -->
-                            <div
-                                class="absolute inset-0 bg-gradient-to-tr from-primary/25 via-accent/15 to-transparent blur-3xl rounded-full opacity-70 animate-float">
-                            </div>
-
-                            <!-- Main Card -->
-                            <div
-                                class="relative z-10 w-full h-full rounded-3xl overflow-hidden shadow-2xl shadow-primary/10 border border-border-light dark:border-border-dark bg-surface-light dark:bg-surface-dark p-3">
-                                <div class="w-full h-full rounded-2xl bg-cover bg-center relative"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAGbFtyt9a-PrfhkSiyHIU-boJo1x-naScriT54_4OhEVhqvn0dWLwfkYNb18BCj0-uQjrR94sM4amO1jViFdwgPQ1byVEH0NHTtZusRLNkvH4gvk75LQxz4qEJ_7pbqOMai-wUC7pBUEP_yDGYSnO3yzP-2fJaG1U2Qj20SdvRVg17vZ2mG7iw9cvFlAUciWQ6Pj0swk7vhiMKTrhHHpAqEBampaT921mKfwtoH-0zSDh13GX6uYH-QlsWa27Eg4-6H1tx8a4Zl3M');">
-                                    <div
-                                        class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-center justify-center">
-                                        <div
-                                            class="bg-surface-light dark:bg-surface-dark p-6 rounded-2xl shadow-2xl max-w-sm w-full mx-4 border border-border-light dark:border-border-dark backdrop-blur-sm">
-                                            <div class="flex items-center gap-3 mb-4">
-                                                <div
-                                                    class="h-12 w-12 rounded-xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center text-white shadow-lg">
-                                                    <span class="material-symbols-outlined">auto_fix_high</span>
-                                                </div>
-                                                <div>
-                                                    <h3 class="font-bold text-base">Gerando Variações</h3>
-                                                    <p
-                                                        class="text-xs text-text-secondary-light dark:text-text-secondary-dark">
-                                                        Processando imagem...</p>
-                                                </div>
-                                            </div>
-                                            <div class="space-y-3">
-                                                <div
-                                                    class="h-3 w-full bg-border-light dark:bg-border-dark rounded-full overflow-hidden">
-                                                    <div
-                                                        class="h-full bg-gradient-to-r from-primary to-accent w-3/4 rounded-full">
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="flex justify-between text-xs text-text-secondary-light dark:text-text-secondary-dark font-mono">
-                                                    <span class="text-primary font-bold">75%</span>
-                                                    <span>Restam 2s</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Floating Card -->
-                            <div class="absolute -bottom-4 -left-4 z-20 bg-surface-light dark:bg-surface-dark p-4 rounded-2xl shadow-xl border border-border-light dark:border-border-dark hidden md:block animate-float"
-                                style="animation-delay: 0.5s;">
-                                <div class="flex items-center gap-3">
-                                    <div class="flex -space-x-3">
-                                        <img alt="User"
-                                            class="h-10 w-10 rounded-full border-3 border-white dark:border-gray-900 shadow-sm"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyvVzRu8NNyvB2u55rdkkYcG-wtsoInjY01wj-KQbijOFfoOZmnUuto7lZlKIpNS2uOCTLocoErwmHdbZgtqsqVk1DQ2K0guhEcWbC7UC8MJJGusibuG-fqR6djFt8sVuHbiOmg2YnwSXjlxRyD2utSb1iAEy1orus_eENuE33qYDkZQfxcApsUUbB-Ny9nk36zlZglSCniwB0BAYmX_Z7p2Go_2v8x_rgo-rlAlIastEEBWoDfR1rXqBU70WdA8hnE4m8UT5PA8c" />
-                                        <img alt="User"
-                                            class="h-10 w-10 rounded-full border-3 border-white dark:border-gray-900 shadow-sm"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWgxyEdUr1ehAl_Q5GfPpsyvcNRWtpb8cug9Q-uCn0vuo3txPp6Oy3dQT0hJOJczu5llLOrGic2Xaf0A-Te04taPs_9GVO00GTdJBoHWGDDwDrwo1-FHZBiH5uQR3bmdivwpMVIleUaXyAHsItkH3u0sdqfoRn_tXj0VA7jOuzXCpa2RtzY725LS4bi4jQsEFV84Ly0JwHq00kRHgXl43e95LpIDxWgYm81OlWdrtAyANSf8z3pX5bWbQeYRcD6czhiVUvOY-P90Q" />
-                                        <img alt="User"
-                                            class="h-10 w-10 rounded-full border-3 border-white dark:border-gray-900 shadow-sm"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmEtdvwnFynd__Cdf2tyG3jpzz6fV2dfa68VxEoXdLR5hwt1h1kNSzx5yYC4r-MVA5CYj6Uj9bzo7D6JyMAo_g0vsxg_bvsrmkISEcAhQm-IjNcgWnoixRg6W1W-kr7y5NkF7dOhyjgaGTGa3hI6oaKGC1qZtHW1dQFXlsKPcgdrEcXZjS8x7fisTntrDCnvP-tmAYaTvCJxsoGbnSnIDi8QPRjwS52IfvIwNHDeDXOc9d_MdE5Tvj9WA2qvSfqA7SuGT80C3ZwL8" />
-                                    </div>
-                                    <div class="flex flex-col">
-                                        <span
-                                            class="text-sm font-bold text-text-main-light dark:text-text-main-dark">+12k
-                                            criadores</span>
-                                        <span
-                                            class="text-xs text-text-secondary-light dark:text-text-secondary-dark">Usando
-                                            hoje</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- FeatureSection (How it works) -->
-            <section
-                class="py-24 bg-surface-light dark:bg-surface-dark border-y border-border-light dark:border-border-dark">
-                <div class="mx-auto max-w-7xl px-6">
-                    <div class="flex flex-col md:flex-row gap-16 items-start">
-                        <div class="flex flex-col gap-6 md:w-1/3 md:sticky md:top-28">
-                            <h2
-                                class="text-3xl md:text-4xl font-bold leading-tight tracking-[-0.02em] text-text-main-light dark:text-text-main-dark font-display">
-                                Como funciona
-                            </h2>
-                            <p class="text-lg text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
-                                Crie thumbnails profissionais em três passos simples, sem abrir o Photoshop. Nossa IA
-                                entende o contexto do seu vídeo.
-                            </p>
-                            <button
-                                class="hidden md:flex w-fit items-center text-primary font-bold hover:underline gap-2 mt-4 group">
-                                Ver tutorial completo
-                                <span
-                                    class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
-                            </button>
-                        </div>
-                        <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-3 gap-6">
-                            <!-- Step 1 -->
-                            <div
-                                class="group flex flex-col gap-4 rounded-2xl border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2">
-                                <div
-                                    class="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary mb-2 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-primary-light group-hover:text-white transition-all duration-300">
-                                    <span class="material-symbols-outlined text-2xl">cloud_upload</span>
-                                </div>
-                                <div class="flex flex-col gap-2">
-                                    <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">1. Envie
-                                        imagens</h3>
-                                    <p
-                                        class="text-sm text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
-                                        Faça upload de uma ou duas fotos raw do seu vídeo ou galeria.
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Step 2 -->
-                            <div
-                                class="group flex flex-col gap-4 rounded-2xl border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2">
-                                <div
-                                    class="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary mb-2 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-primary-light group-hover:text-white transition-all duration-300">
-                                    <span class="material-symbols-outlined text-2xl">title</span>
-                                </div>
-                                <div class="flex flex-col gap-2">
-                                    <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">2.
-                                        Digite o título</h3>
-                                    <p
-                                        class="text-sm text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
-                                        Escreva a manchete principal (hook) que vai na capa.
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Step 3 -->
-                            <div
-                                class="group flex flex-col gap-4 rounded-2xl border border-border-light dark:border-border-dark bg-background-light dark:bg-background-dark p-6 transition-all duration-300 hover:border-primary/50 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-2">
-                                <div
-                                    class="flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/10 to-accent/10 text-primary mb-2 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-primary-light group-hover:text-white transition-all duration-300">
-                                    <span class="material-symbols-outlined text-2xl">download_done</span>
-                                </div>
-                                <div class="flex flex-col gap-2">
-                                    <h3 class="text-lg font-bold text-text-main-light dark:text-text-main-dark">3. Baixe
-                                        as versões</h3>
-                                    <p
-                                        class="text-sm text-text-secondary-light dark:text-text-secondary-dark leading-relaxed">
-                                        Nossa IA gera 5 opções prontas. Escolha a melhor e baixe.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Results Section (Gallery) -->
-            <section class="py-24 overflow-hidden">
-                <div class="mx-auto max-w-7xl px-6">
-                    <div class="flex flex-col items-center text-center gap-4 mb-16">
-                        <div
-                            class="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-                            Galeria
-                        </div>
-                        <h2
-                            class="text-3xl md:text-5xl font-bold leading-tight tracking-[-0.02em] text-text-main-light dark:text-text-main-dark font-display">
-                            Resultados Instantâneos
-                        </h2>
-                        <p class="text-text-secondary-light dark:text-text-secondary-dark max-w-2xl text-lg">
-                            Veja a mágica acontecer. Transformamos fotos comuns em capas de alta conversão.
-                        </p>
-                    </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <!-- Card 1: Before -->
-                        <div
-                            class="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-lg border border-border-light dark:border-border-dark hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAnS4LKCSmo9PzBzJxJQ5bsZNK5dPzuATof3DGR-Zv24B5zE0UoGADBuBbPvOS1WOYWt7GBVHtMwfDnKh6Cm1soEmyaQrC-28UtBTck98-2i623_gFj8JFAK-zl5rUwzV_S9j6JheT6jGHhRoph_XLx14dN49MpFkF5A46PPbW8MtHEexDUC1so6OC1s8JhX2UUyJS_EUMSrZjL_Hijoovn7lAQj56YUJDoGHBDqOL1tWCZNm_bpNCIvXYsWWMeNktfWuUcpu1BAQM');">
-                            </div>
-                            <div
-                                class="absolute top-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                                Original
-                            </div>
-                        </div>
-                        <!-- Card 2: After -->
-                        <div
-                            class="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-lg border-2 border-primary/30 ring-4 ring-primary/10 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpAiT2alyMPZ3U8Xr40b49S4we4e7i-0r-tl4qCTZmJef8v9-G85Zm-sQZMRHMHKNXm31bu6F-LS5wt6RXhfeWQ8lYiEIvyqRulQK2IAVIZxYxZNiPffJPpbih_OYPkggsYB4f1QtgMrOOBLO7_y_qY77tcuzY-VuXIuZxTtof-CcGG79RQT6JQPDBgkMd94Wj1KdAHd-Zfxs2rLdBOs6eIPgib2Bhadtb3wOK7kAVA41ZR72VFaWWfMj3Xtfn0Wh6yJJRJBGiSgE'); filter: contrast(1.2) saturate(1.2);">
-                            </div>
-                            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80">
-                            </div>
-                            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-full text-center px-4">
-                                <h3 class="text-4xl font-black text-white italic drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]"
-                                    style="font-family: 'Space Grotesk'; -webkit-text-stroke: 1px black;">NÃO ACREDITO!
-                                </h3>
-                            </div>
-                            <div class="absolute bottom-6 right-6">
-                                <span
-                                    class="material-symbols-outlined text-yellow-400 text-4xl drop-shadow-lg">emoji_events</span>
-                            </div>
-                            <div
-                                class="absolute top-4 left-4 bg-gradient-to-r from-primary to-primary-light text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
-                                <span class="material-symbols-outlined text-xs">auto_awesome</span>
-                                Gerado
-                            </div>
-                        </div>
-                        <!-- Card 3: Before -->
-                        <div
-                            class="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-lg border border-border-light dark:border-border-dark hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA_u26jsFsUP3lIbnE4oBN2gEy6mqTRmdg-TnSYASNSv7y3HITBN8a6KLen6LdKF_tp6Q1RRyRvRNjravAeEEDNxkuxEvBssLIz89Orb_FhaywQ7TfhrXNKdHvgC4SwCLTqqSY4bv_XteSloReRQPL2L8uLsk-tvFWgMpIVqcmsD-EZRGVSmanOL9ce_qnyUm6FuoBtyA6pli-CTI58G2DSQEounL6uFMNQA6XBCKlD0lIrQ7Pb5APnLAABunBFp2sYCODGgkbuEJY');">
-                            </div>
-                            <div
-                                class="absolute top-4 left-4 bg-black/70 backdrop-blur-sm text-white text-xs font-bold px-3 py-1.5 rounded-full">
-                                Original
-                            </div>
-                        </div>
-                        <!-- Card 4: After -->
-                        <div
-                            class="group relative aspect-[9/16] overflow-hidden rounded-2xl bg-surface-light dark:bg-surface-dark shadow-lg border-2 border-primary/30 ring-4 ring-primary/10 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
-                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC2GPde_eQi_auYv6F-WPXIV-C_aTpZFLMTw_QMRvxkb3NG4g03ZTrEnhmIdDVW2rPQKqMAti7_NtbyHfoGvYi-LBk2D4j0qo9NZ0t_OdmUtrWsP3eatLeJdbDwlLIC-buUD2gD1FIwcDT8dV0VmIbmzGt1tKHUSGcUzfuCFFNkx89FWO_6et63ypUnuwt5NiKTepfush5hm5gvy_15Iw88Es80HKT4nf1vGxBEdYryhBnrUQtZRi62kCn5ee9_EpU_vEindCK-k0g'); filter: brightness(1.1);">
-                            </div>
-                            <div
-                                class="absolute inset-0 bg-gradient-to-t from-primary/70 to-transparent opacity-60 mix-blend-multiply">
-                            </div>
-                            <div class="absolute bottom-1/3 left-0 w-full text-center px-2">
-                                <div
-                                    class="inline-block bg-white text-black px-5 py-3 text-2xl font-black transform -rotate-3 shadow-xl rounded-lg">
-                                    SETUP 2026
-                                </div>
-                            </div>
-                            <div
-                                class="absolute top-4 left-4 bg-gradient-to-r from-primary to-primary-light text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-lg">
-                                <span class="material-symbols-outlined text-xs">auto_awesome</span>
-                                Gerado
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-16 flex justify-center">
-                        <button
-                            class="flex items-center gap-2 text-primary font-bold hover:text-primary-dark transition-colors group">
-                            Ver mais exemplos na galeria
-                            <span
-                                class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- CTA Section -->
-            <section class="relative py-28 overflow-hidden">
-                <!-- Background gradient -->
-                <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary-dark to-black"></div>
+            <!-- Right: image grid -->
+            <div class="lg:w-1/2 w-full image-tilt">
                 <div
-                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(96,165,250,0.3),_transparent_50%)]">
-                </div>
-                <div
-                    class="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(37,99,235,0.2),_transparent_50%)]">
-                </div>
-
-                <div class="relative mx-auto max-w-4xl px-6 text-center">
-                    <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight font-display">
-                        Pare de perder horas no Photoshop.
-                    </h2>
-                    <p class="text-xl text-white/80 mb-12 max-w-2xl mx-auto">
-                        Junte-se a mais de 5.000 criadores que automatizaram suas thumbnails e aumentaram o CTR em até
-                        30%.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <button
-                            class="w-full sm:w-auto flex h-16 px-10 items-center justify-center rounded-2xl bg-white text-primary text-lg font-bold hover:bg-white/90 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 shadow-xl">
-                            Criar minha primeira thumbnail
-                            <span class="material-symbols-outlined ml-2">arrow_forward</span>
-                        </button>
-                    </div>
-                    <p class="text-sm text-white/60 mt-6">
-                        ✨ Teste grátis por 7 dias • Sem cartão de crédito
-                    </p>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer
-            class="bg-background-light dark:bg-background-dark border-t border-border-light dark:border-border-dark py-16">
-            <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row justify-between items-center gap-8">
-                <div class="flex items-center gap-3 text-text-main-light dark:text-text-main-dark">
+                    class="relative rounded-[2.5rem] border border-white/10 bg-[#0d0d0d] overflow-hidden p-6 sm:p-8 shadow-2xl aspect-square">
+                    <!-- glow behind -->
                     <div
-                        class="flex items-center justify-center size-10 rounded-xl bg-gradient-to-br from-primary to-primary-light text-white">
-                        <span class="material-symbols-outlined">auto_awesome_motion</span>
+                        class="absolute inset-0 bg-gradient-to-tr from-[var(--neon-pink)]/20 to-[var(--neon-cyan)]/10 blur-3xl pointer-events-none">
                     </div>
-                    <span class="font-bold text-xl font-display">ThumbGerador</span>
-                </div>
-                <div class="flex gap-8 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark">
-                    <a class="hover:text-primary transition-colors" href="#">Termos</a>
-                    <a class="hover:text-primary transition-colors" href="#">Privacidade</a>
-                    <a class="hover:text-primary transition-colors" href="#">Suporte</a>
-                </div>
-                <div class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-                    © 2026 ThumbGerador Inc.
+
+                    <div class="relative grid grid-cols-2 gap-4 h-full w-full">
+                        <div class="rounded-2xl bg-cover bg-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 border border-white/10"
+                            style="background-image:url('assets/images/thumb_finance_1772322388045.png')">
+                        </div>
+                        <div class="rounded-2xl bg-cover bg-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 border border-white/10"
+                            style="background-image:url('assets/images/thumb_podcast_1772322416313.png')">
+                        </div>
+                        <div class="rounded-2xl bg-cover bg-center border-2 border-[var(--neon-pink)] opacity-100 hover:scale-[1.04] transition-transform duration-300 z-10 shadow-[0_0_25px_rgba(255,0,80,0.5)]"
+                            style="background-image:url('assets/images/thumb_gaming_1772322374277.png')">
+                        </div>
+                        <div class="rounded-2xl bg-cover bg-center grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-500 border border-white/10"
+                            style="background-image:url('assets/images/thumb_tech_1772322401284.png')">
+                        </div>
+                    </div>
+
+                    <!-- Badge -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                        <div
+                            class="bg-white text-black font-[Outfit] font-black uppercase italic tracking-widest text-lg px-6 py-2 rounded-full rotate-[-4deg] shadow-2xl pointer-events-auto hover:rotate-0 hover:scale-105 transition-all duration-300 cursor-default">
+                            Validação A/B ⚡
+                        </div>
+                    </div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════ REVIEWS MARQUEE ══════════════════════════════════ -->
+    <section class="py-24 overflow-hidden relative z-10">
+        <div class="text-center mb-14 px-6">
+            <h2 class="font-[Outfit] font-black text-5xl uppercase tracking-tighter">
+                Quem usa nunca mais <span class="text-[var(--neon-pink)] tiktok-shadow-sm">Larga</span>
+            </h2>
+            <p class="text-lg text-white/50 mt-3 font-medium">
+                Sente o peso e a brutalidade de quem tá vivendo os resultados nos canais.
+            </p>
+        </div>
+
+        <div class="marquee-container">
+            <!-- First strip -->
+            <div class="marquee-content">
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-cyan)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=1')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">NewsBuddyLove</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"This is an amazing product. It is very
+                        versatile and easy to work and edit your thumbnails with. In my opinion it beats any other
+                        product out there."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-pink)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=2')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Ryan Barne</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"O ThumbGerador é covardia. Faço 20
+                        thumbnails em instantes pro Teste A/B girar doido."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-white/30 shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=3')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Badis Design</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Economia de tempo que derrete a mente.
+                        Acerta a paleta logo de cara pro canal."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-cyan)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=4')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Nicky Saunders</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Rodei ontem testando uns estilos novos
+                        e pegou a vibe underground muito melhor do que o esperado. Monstro."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-pink)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=5')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Nick Lauer</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Thumbnail que pulsa em 1 segundo.
+                        Mando o link e o negócio já desenha o hook pra mim. Tchau PS."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-white/30 shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=6')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">James Masi</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Parei pra sempre de queimar neurônios
+                        ajustando luz. Agora só taco no TikTok o arquivo exportado da IA deles."</p>
+                </div>
+            </div>
+            <!-- Duplicate for seamless loop -->
+            <div class="marquee-content" aria-hidden="true">
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-cyan)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=1')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">NewsBuddyLove</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"This is an amazing product. It is very
+                        versatile and easy to work and edit your thumbnails with. In my opinion it beats any other
+                        product out there."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-pink)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=2')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Ryan Barne</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"O ThumbGerador é covardia. Faço 20
+                        thumbnails em instantes pro Teste A/B girar doido."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-white/30 shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=3')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Badis Design</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Economia de tempo que derrete a mente.
+                        Acerta a paleta logo de cara pro canal."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-cyan)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=4')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Nicky Saunders</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Rodei ontem testando uns estilos novos
+                        e pegou a vibe underground muito melhor do que o esperado. Monstro."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-[var(--neon-pink)] shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=5')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">Nick Lauer</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Thumbnail que pulsa em 1 segundo.
+                        Mando o link e o negócio já desenha o hook pra mim. Tchau PS."</p>
+                </div>
+                <div class="w-[340px] bento-card p-6 flex-shrink-0 cursor-default">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-cover bg-center border-2 border-white/30 shrink-0"
+                            style="background-image:url('https://i.pravatar.cc/100?img=6')"></div>
+                        <div>
+                            <p class="font-bold text-sm leading-tight">James Masi</p>
+                            <p class="text-xs text-yellow-400 mt-0.5">★★★★★</p>
+                        </div>
+                    </div>
+                    <p class="text-white/75 font-medium text-sm leading-relaxed">"Parei pra sempre de queimar neurônios
+                        ajustando luz. Agora só taco no TikTok o arquivo exportado da IA deles."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════ CTA ══════════════════════════════════ -->
+    <section class="py-28 relative text-center z-10 px-6">
+        <div
+            class="max-w-5xl mx-auto rounded-[2.5rem] bg-[#080808] p-12 md:p-24 border border-white/10 tiktok-box overflow-hidden relative">
+            <!-- radial glow center -->
+            <div
+                class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(0,242,254,0.08),transparent_70%)] pointer-events-none">
+            </div>
+            <!-- dot grid bg -->
+            <div class="absolute inset-0 opacity-30 pointer-events-none"
+                style="background-image:radial-gradient(circle,rgba(255,255,255,0.15) 1px,transparent 1px);background-size:20px 20px">
+            </div>
+
+            <div class="relative z-10">
+                <h2 class="font-[Outfit] font-black text-6xl md:text-8xl mb-6 tracking-tighter uppercase leading-[0.9]">
+                    PARE DE SANGRAR <br />
+                    <span
+                        class="tiktok-glitch text-[var(--neon-pink)] translate-y-2 inline-block drop-shadow-[0_0_20px_rgba(255,0,80,0.8)]"
+                        data-text="VIEWS">VIEWS</span>.
+                </h2>
+                <p class="text-xl font-medium text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    Comece a espancar a concorrência no CTR hoje. Ferramenta insana e bruta pra criadores brutais.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-5">
+                    <a href="#" class="btn-tiktok text-lg w-full sm:w-auto">Gerar Primeira Capa</a>
+                    <a href="#" class="btn-tiktok-outline text-lg w-full sm:w-auto">Experimentar Grátis</a>
+                </div>
+
+                <div
+                    class="flex flex-wrap justify-center gap-8 mt-12 font-[Outfit] font-bold uppercase tracking-widest text-xs text-white/40">
+                    <div class="flex items-center gap-2"><span
+                            class="text-[var(--neon-cyan)] material-symbols-outlined text-base">trending_up</span> +50%
+                        Média de CTR</div>
+                    <div class="flex items-center gap-2"><span
+                            class="text-[var(--neon-pink)] material-symbols-outlined text-base">speed</span> Workflow
+                        Hiperágil</div>
+                    <div class="flex items-center gap-2"><span
+                            class="material-symbols-outlined text-base text-green-400">savings</span> Corte de Custos
+                        Absurdo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══════════════════════════════════ FOOTER ══════════════════════════════════ -->
+    <footer class="border-t border-white/[0.07] pt-20 pb-10 bg-[#060606] z-10 relative">
+        <div class="max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+
+            <!-- Brand -->
+            <div class="lg:col-span-1">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-black shadow-[2px_2px_0px_var(--neon-cyan),-2px_-2px_0px_var(--neon-pink)]">
+                        <span class="material-symbols-outlined font-black text-sm">play_arrow</span>
+                    </div>
+                    <span class="font-[Outfit] font-black text-xl tracking-tighter uppercase">ThumbGerador</span>
+                </div>
+                <p class="text-white/40 text-sm leading-relaxed max-w-xs font-medium">
+                    Esta é uma landing page template criada apenas de inspiração para novos projetos.
+                </p>
+            </div>
+
+            <!-- Features -->
+            <div>
+                <h4 class="font-[Outfit] font-black text-sm mb-5 uppercase tracking-wider text-[var(--neon-pink)]">
+                    Recursos
+                </h4>
+                <ul class="space-y-3 text-white/40 font-medium text-sm">
+                    <li><a href="/pricing" class="hover:text-[var(--neon-pink)] transition-colors">Preços</a>
+                    </li>
+                    <li><a href="https://github.com/DaviLuquini/ThumbGenerator" target="_blank"
+                            class="hover:text-[var(--neon-pink)] transition-colors">Github</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Use Cases -->
+            <div>
+                <h4 class="font-[Outfit] font-black text-sm mb-5 uppercase tracking-wider text-[var(--neon-cyan)]">
+                    Meus outros projetos
+                </h4>
+                <ul class="space-y-3 text-white/40 font-medium text-sm">
+                    <li><a href="https://rickandmortydle.com/" target="_blank"
+                            class="hover:text-[var(--neon-cyan)] transition-colors">
+                            Rick and Morty Dle</a>
+                    </li>
+                    <li><a href="https://impostor-jogo.vercel.app/" target="_blank"
+                            class="hover:text-[var(--neon-cyan)] transition-colors">Jogo do Impostor</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom bar -->
+        <div
+            class="max-w-[1400px] mx-auto px-6 border-t border-white/[0.06] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-white/30 text-xs font-medium">
+            <div class="flex gap-5">
+                <a href="#" class="hover:text-white transition-colors">Termos de Uso</a>
+                <span>•</span>
+                <a href="#" class="hover:text-white transition-colors">Política de Privacidade</a>
+            </div>
+            <div>Made with love in Brazil 🇧🇷 — ©2026 ThumbGerador</div>
+            <div class="flex gap-5">
+                <a href="#" class="hover:text-[var(--neon-pink)] transition-colors">YouTube</a>
+                <a href="#" class="hover:text-white transition-colors">X / Twitter</a>
+                <a href="#" class="hover:text-[var(--neon-pink)] transition-colors">Instagram</a>
+            </div>
+        </div>
+    </footer>
+
 </div>
