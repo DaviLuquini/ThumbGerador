@@ -7,7 +7,9 @@ Este projeto é um **template open-source de Landing Page e Pricing Page** criad
 Sinta-se 100% livre para clonar, estudar, modificar e **usar este template gratuitamente** em seus próprios projetos comerciais ou pessoais! 🎉
 
 ---
+
 <img width="1900" height="857" alt="image" src="https://github.com/user-attachments/assets/8884b148-12f5-4a2e-a1a4-b90682c820f6" />
+
 ---
 
 ## 🛠 Tecnologias Utilizadas
