@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /app/
+Disallow: /api/
+
+Sitemap: https://thumbgerador.com/sitemap.xml

@@ -5,11 +5,21 @@ import { RegisterPage } from './pages/register/register';
 export const authRoutes: Routes = [
     {
         path: 'login',
-        component: LoginPage
+        component: LoginPage,
+        title: 'Entrar | ThumbGerador',
+        data: {
+            description: 'Acesse sua conta no ThumbGerador para criar thumbnails com IA.',
+            robots: 'noindex, nofollow'
+        }
     },
     {
         path: 'register',
-        component: RegisterPage
+        component: RegisterPage,
+        title: 'Criar conta | ThumbGerador',
+        data: {
+            description: 'Crie sua conta no ThumbGerador e comece a gerar thumbnails com IA.',
+            robots: 'noindex, nofollow'
+        }
     },
     {
         path: '',
